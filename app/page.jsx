@@ -1,6 +1,6 @@
 "use-client"
 
-import HeroSection from "../Components/HeroSection";
+import HeroSection from "./Components/HeroSection";
 
 const HomePage = () => {
   return (
