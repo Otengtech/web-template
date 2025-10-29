@@ -32,7 +32,7 @@ export default function HeroSection() {
         <Image
           src={HeroImage}
           alt="Artist Hero"
-          className="w-[320px] sm:w-[320px] object-cover md:w-[450px] lg:w-[550px] drop-shadow-2xl rounded-2xl hover:scale-105 transition-transform duration-500"
+          className="w-[280px] sm:w-[320px] object-cover md:w-[450px] lg:w-[550px] drop-shadow-2xl rounded-2xl hover:scale-105 transition-transform duration-500"
           priority
         />
       </div>
