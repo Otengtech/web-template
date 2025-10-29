@@ -1,149 +1,264 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, Home, Music, Box, ShoppingBag, Phone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  Home,
+  Music,
+  Box,
+  ShoppingBag,
+  Phone,
+  User,
+  Menu,
+  X,
+  Camera,
+  Star,
+  BookOpen,
+  Lightbulb,
+} from "lucide-react";
 
 export default function ArtistNavbar() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [accountMenu, setAccountMenu] = useState(false);
+  const [userName, setUserName] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("name") || "" : ""
+  );
+  const [userEmail, setUserEmail] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("email") || "" : ""
+  );
+  const [profileImage, setProfileImage] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("profileImage") || null : null
+  );
+
   const pathname = usePathname();
+  const router = useRouter();
+  const accountRef = useRef(null);
 
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/music", label: "Music" },
-    { href: "/projects", label: "Projects" },
-    { href: "/merch", label: "Merch" },
-    { href: "/contact", label: "Contact" },
-  ];
+  // Handle outside click for account dropdown
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (accountRef.current && !accountRef.current.contains(e.target)) {
+        setAccountMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  // Bottom nav links (mobile)
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfileImage(reader.result);
+      localStorage.setItem("profileImage", reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setUserName("");
+    setUserEmail("");
+    setProfileImage(null);
+    setAccountMenu(false);
+    setIsOpen(false);
+    router.push("/login");
+  };
+
+  const navItems = ["About", "Music", "Projects", "Merch", "Contact"];
+  const mobileNavItems = ["About", "Contact", "FAQ", "Terms"];
+
   const bottomLinks = [
-    { href: "/", label: "Home", icon: <Home size={22} /> },
-    { href: "/music", label: "Music", icon: <Music size={22} /> },
-    { href: "/projects", label: "Projects", icon: <Box size={22} /> },
-    { href: "/merch", label: "Merch", icon: <ShoppingBag size={22} /> },
-    { href: "/contact", label: "Contact", icon: <Phone size={22} /> },
+    { href: "/", icon: <Home size={20} />, label: "Home" },
+    { href: "/music", icon: <Music size={20} />, label: "Music" },
+    { href: "/projects", icon: <Box size={20} />, label: "Projects" },
+    { href: "/merch", icon: <ShoppingBag size={20} />, label: "Merch" },
+    { href: "/contact", icon: <Phone size={20} />, label: "Contact" },
   ];
 
   return (
     <>
-      {/* ─── Top Navbar ─────────────────────────────── */}
+      {/* ─── TOP NAVBAR ─────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-lime-300/10 via-green-400/10 to-yellow-300/10 
-        backdrop-blur-2xl border-b border-white/20 shadow-[inset_0_0_0.5px_rgba(255,255,255,0.3),0_4px_30px_rgba(0,0,0,0.15)]
-        saturate-150 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-50 bg-white/10 backdrop-blur-2xl border-b border-white/20 
+                   shadow-[inset_0_0_0.5px_rgba(255,255,255,0.3),0_4px_30px_rgba(0,0,0,0.2)]"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-lime-400 to-green-400 hover:scale-105 transition-transform"
+            className="flex items-center gap-2 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-yellow-400 to-green-500"
           >
+            <div className="w-3 h-3 bg-lime-400 rounded-full animate-pulse"></div>
             Flip
           </Link>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {links.map((link) => (
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
+            <Link
+              href="/"
+              className={`${
+                pathname === "/" ? "text-lime-300" : "text-white/90 hover:text-lime-300"
+              } transition`}
+            >
+              Home
+            </Link>
+
+            {navItems.map((item) => (
               <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === link.href
+                key={item}
+                href={`/${item.toLowerCase()}`}
+                className={`${
+                  pathname === `/${item.toLowerCase()}`
                     ? "text-lime-300"
                     : "text-white/90 hover:text-lime-300"
-                }`}
+                } transition`}
               >
-                {link.label}
+                {item}
               </Link>
             ))}
 
-            {/* Newsletter Button */}
-            <button className="ml-4 px-5 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-green-500 to-yellow-400 text-black shadow-md hover:shadow-[0_0_15px_rgba(132,204,22,0.5)] transition-all">
-              Newsletter
-            </button>
+            {/* Account Menu */}
+            <div className="relative" ref={accountRef}>
+              <button
+                onClick={() => setAccountMenu((prev) => !prev)}
+                className="text-lime-400 hover:text-yellow-300"
+              >
+                <User size={22} />
+              </button>
+
+              <div
+                className={`absolute top-12 right-0 w-64 p-5 bg-white/10 border border-white/20 backdrop-blur-xl 
+                            shadow-xl rounded-2xl transition-all duration-300 ${
+                              accountMenu
+                                ? "translate-y-0 opacity-100"
+                                : "-translate-y-4 opacity-0 pointer-events-none"
+                            }`}
+              >
+                <div className="flex flex-col items-center text-white space-y-3">
+                  <div className="relative">
+                    {profileImage ? (
+                      <img
+                        src={profileImage}
+                        alt="Profile"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-lime-400"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-xl font-semibold">
+                        {userName ? userName.charAt(0).toUpperCase() : "G"}
+                      </div>
+                    )}
+                    <label className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 cursor-pointer shadow hover:bg-gray-100">
+                      <Camera className="text-lime-500" size={14} />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                  <div className="font-bold">{userName || "Guest"}</div>
+                  <div className="text-xs text-gray-200">
+                    {userEmail || "No email provided"}
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full py-2 bg-lime-500/80 text-black font-semibold rounded-full hover:bg-lime-400 transition"
+                  >
+                    {userEmail ? "Logout" : "Login"}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle */}
           <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden text-white hover:text-lime-300 transition"
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-lime-300 z-50"
           >
-            {open ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
-
-        {/* Mobile Fullscreen Menu */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-gradient-to-b from-green-900/95 via-lime-800/90 to-yellow-700/80 
-                         backdrop-blur-xl flex flex-col items-center justify-center space-y-8 z-40"
-            >
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={`text-2xl font-semibold transition-colors ${
-                    pathname === link.href
-                      ? "text-lime-300"
-                      : "text-white hover:text-lime-300"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
-              <button
-                onClick={() => setOpen(false)}
-                className="mt-6 px-6 py-3 text-lg font-bold rounded-full bg-gradient-to-r from-lime-400 via-green-500 to-yellow-400 text-black hover:shadow-[0_0_25px_rgba(132,204,22,0.6)] transition-all"
-              >
-                Newsletter
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
 
-      {/* ─── Bottom Navbar (Mobile Only) ─────────────────────────────── */}
+      {/* ─── MOBILE SLIDE-IN MENU ─────────────────────────────── */}
       <div
-        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 
-                   w-[95%] max-w-md md:hidden 
-                   bg-white/10 backdrop-blur-2xl border border-white/20 
-                   rounded-3xl px-4 py-3 flex justify-between items-center 
-                   shadow-[0_4px_25px_rgba(0,0,0,0.2),inset_0_0_0.5px_rgba(255,255,255,0.3)]
-                   saturate-150"
+        className={`fixed top-0 left-0 h-screen w-4/5 max-w-xs bg-white/10 border border-white/20 backdrop-blur-2xl 
+                    text-white z-40 transform transition-transform duration-300 ${
+                      isOpen ? "translate-x-0" : "-translate-x-full"
+                    }`}
       >
-        {bottomLinks.map((link) => {
-          const active = pathname === link.href;
+        <div className="flex flex-col h-full p-6 space-y-6">
+          <div className="flex items-center space-x-3">
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="w-10 h-10 rounded-full border border-lime-400 object-cover"
+              />
+            ) : (
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-semibold">
+                {userName ? userName.charAt(0).toUpperCase() : "G"}
+              </div>
+            )}
+            <div>
+              <p className="font-semibold">{userName || "Guest"}</p>
+              <p className="text-xs text-gray-300">{userEmail || "No email"}</p>
+            </div>
+          </div>
+
+          {mobileNavItems.map((item) => (
+            <Link
+              key={item}
+              href={`/${item.toLowerCase()}`}
+              onClick={() => setIsOpen(false)}
+              className="hover:text-lime-400 transition"
+            >
+              {item}
+            </Link>
+          ))}
+
+          <div className="mt-auto">
+            <button
+              onClick={handleLogout}
+              className="w-full py-2 bg-gradient-to-r from-lime-500 to-yellow-400 text-black rounded-md font-semibold hover:scale-[1.02] transition"
+            >
+              {userEmail ? "Logout" : "Login"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* ─── BOTTOM NAVBAR (Mobile Only) ─────────────────────────────── */}
+      <div
+        className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-md 
+                   bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl
+                   shadow-[0_0_25px_rgba(132,204,22,0.3)] flex justify-around items-center 
+                   py-3 text-lime-300 z-50"
+      >
+        {bottomLinks.map((item) => {
+          const isActive = pathname === item.href;
           return (
             <Link
-              key={link.href}
-              href={link.href}
-              className={`flex flex-col items-center gap-1 text-xs font-medium transition-all ${
-                active
-                  ? "text-lime-300 scale-105"
-                  : "text-white/80 hover:text-lime-200"
+              key={item.href}
+              href={item.href}
+              className={`flex flex-col items-center text-xs transition-all ${
+                isActive ? "scale-110 text-yellow-300" : "hover:scale-105"
               }`}
             >
-              <motion.div
-                animate={{
-                  scale: active ? 1.2 : 1,
-                  opacity: active ? 1 : 0.8,
-                }}
-                transition={{ duration: 0.2 }}
-              >
-                {link.icon}
-              </motion.div>
-              <span>{link.label}</span>
+              {item.icon}
+              {item.label}
             </Link>
           );
         })}
