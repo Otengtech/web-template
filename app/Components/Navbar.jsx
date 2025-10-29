@@ -68,7 +68,7 @@ export default function ArtistNavbar() {
   };
 
   const navItems = ["About", "Music", "Projects", "Merch", "Contact"];
-  const mobileNavItems = ["About", "Contact", "FAQ", "Terms"];
+  const mobileNavItems = ["About", "Contact", "Terms"];
 
   const bottomLinks = [
     { href: "/", icon: <Home size={20} />, label: "Home" },
@@ -82,14 +82,14 @@ export default function ArtistNavbar() {
     <>
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 w-full z-50 bg-white/10 backdrop-blur-2xl border-b border-white/20 
+        className="fixed top-0 left-0 w-full z-40 bg-black/10 backdrop-blur-2xl border-b border-white/20 
                    shadow-[inset_0_0_0.5px_rgba(255,255,255,0.3),0_4px_30px_rgba(0,0,0,0.2)]"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-yellow-400 to-green-500"
+            className="flex items-center gap-2 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
           >
             <div className="w-3 h-3 bg-lime-400 rounded-full animate-pulse"></div>
             Flip
@@ -124,7 +124,7 @@ export default function ArtistNavbar() {
             <div className="relative" ref={accountRef}>
               <button
                 onClick={() => setAccountMenu((prev) => !prev)}
-                className="text-lime-400 hover:text-yellow-300"
+                className="text-lime-300 hover:text-yellow-200"
               >
                 <User size={22} />
               </button>
@@ -187,8 +187,8 @@ export default function ArtistNavbar() {
 
       {/* ─── MOBILE SLIDE-IN MENU ─────────────────────────────── */}
       <div
-        className={`fixed top-0 left-0 h-screen w-4/5 max-w-xs bg-white/10 border border-white/20 backdrop-blur-2xl 
-                    text-white z-40 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-4/5 max-w-xs z-40 bg-white/10 border border-white/20 backdrop-blur-2xl 
+                    text-white transform transition-transform duration-300 ${
                       isOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
       >
@@ -243,7 +243,7 @@ export default function ArtistNavbar() {
       {/* ─── BOTTOM NAVBAR (Mobile Only) ─────────────────────────────── */}
       <div
         className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-md 
-                   bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl
+                   bg-black/10 backdrop-blur-2xl border border-white/20 rounded-3xl
                    shadow-[0_0_25px_rgba(132,204,22,0.3)] flex justify-around items-center 
                    py-3 text-lime-300 z-50"
       >
