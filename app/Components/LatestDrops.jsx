@@ -57,7 +57,7 @@ export default function LatestDrops() {
   }, [paused]);
 
   return (
-    <section className="bg-black text-white py-24 px-4 md:px-10 lg:px-20 overflow-hidden w-full">
+    <section className="bg-black text-white py-24 px-4 overflow-hidden w-full">
       <div className="max-w-7xl mx-auto space-y-10 w-full">
         <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent text-center">
           Latest Drops

@@ -82,7 +82,7 @@ export default function ArtistNavbar() {
     <>
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 bg-white/10 backdrop-blur-2xl border-b border-white/20 
+        className="fixed top-0 left-0 w-full z-40 bg-white/20 backdrop-blur-2xl border-b border-white/20 
                   "
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -91,8 +91,8 @@ export default function ArtistNavbar() {
             href="/"
             className="flex items-center gap-2 text-xl font-extrabold"
           >
-            <div className="w-3 h-3 text-gray-100 rounded-full animate-pulse"></div>
-            FLIP MUSIC
+            <div className="text-white">
+            FLIP MUSIC</div>
           </Link>
 
           {/* Desktop Menu */}
@@ -124,7 +124,7 @@ export default function ArtistNavbar() {
             <div className="relative" ref={accountRef}>
               <button
                 onClick={() => setAccountMenu((prev) => !prev)}
-                className="text-gray-700 cursor-pointer hover:text-gray-500"
+                className="text-gray-100 cursor-pointer hover:text-gray-500"
               >
                 <User size={22} />
               </button>
@@ -243,7 +243,7 @@ export default function ArtistNavbar() {
       {/* ─── BOTTOM NAVBAR (Mobile Only) ─────────────────────────────── */}
       <div
         className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-md 
-                   bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl
+                   bg-black/40 backdrop-blur-2xl border border-white/20 rounded-3xl
                    shadow-[0_0_25px_rgba(132,204,22,0.3)] flex justify-around items-center 
                    py-3 text-lime-300 z-50"
       >
