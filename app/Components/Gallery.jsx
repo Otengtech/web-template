@@ -97,7 +97,7 @@ export default function GalleryInfo() {
             {galleryItems.map((item, i) => (
               <motion.div
                 key={item.id}
-                className={`relative flex-shrink-0 w-56 sm:w-60 md:w-64 h-52 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer group transition-all duration-700 ${
+                className={`relative flex-shrink-0 w-48 sm:w-60 md:w-52 h-52 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer group transition-all duration-700 ${
                   i % 2 === 0
                     ? "md:translate-y-2"
                     : i % 3 === 0
@@ -119,7 +119,7 @@ export default function GalleryInfo() {
                 <motion.img
                   src={item.image}
                   alt={item.title}
-                  className="w-40 h-40 object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 {/* Overlay Fade */}
