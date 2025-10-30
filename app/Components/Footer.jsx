@@ -82,7 +82,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <motion.div
-        className="text-center text-gray-500 text-xs"
+        className="text-center text-gray-500 text-xs pb-10 md:pb-0"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}

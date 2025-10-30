@@ -84,7 +84,7 @@ export default function LatestDrops() {
                 <motion.img
                   src={drop.image}
                   alt={drop.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full block object-cover transition-transform duration-700 group-hover:scale-110"
                   whileHover={{ scale: 1.1 }}
                 />
 
@@ -92,7 +92,7 @@ export default function LatestDrops() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
 
                 {/* Music Type */}
-                <span className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-lime-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow-md">
+                <span className="absolute top-4 block left-4 bg-gradient-to-r from-green-500 to-lime-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow-md">
                   {drop.type}
                 </span>
 
@@ -101,7 +101,7 @@ export default function LatestDrops() {
                   <h3 className="text-xl font-bold">{drop.name}</h3>
                   <a
                     href="#"
-                    className="flex items-center space-x-2 text-sm font-semibold text-lime-400 hover:text-green-400 transition"
+                    className="flex block items-center space-x-2 text-sm font-semibold text-lime-400 hover:text-green-400 transition"
                   >
                     <Play size={16} />
                     <span>Listen Now →</span>

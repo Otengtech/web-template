@@ -42,14 +42,14 @@ export default function StreamsSection() {
                     rotate: 5,
                     transition: { type: "spring", stiffness: 300 },
                   }}
-                  className="p-5 bg-gradient-to-br from-green-500 to-lime-400 rounded-full shadow-lg"
+                  className="p-5 block bg-gradient-to-br from-green-500 to-lime-400 rounded-full shadow-lg"
                 >
                   <stat.icon className="w-8 h-8 text-black" />
                 </motion.div>
-                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-400 to-lime-400 bg-clip-text text-transparent">
+                <h2 className="text-4xl block font-extrabold bg-gradient-to-r from-green-400 to-lime-400 bg-clip-text text-transparent">
                   {stat.value}
                 </h2>
-                <p className="text-gray-200">{stat.label}</p>
+                <p className="text-gray-200 block">{stat.label}</p>
               </motion.div>
             ))}
         </AnimatePresence>

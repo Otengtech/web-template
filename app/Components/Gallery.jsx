@@ -76,10 +76,10 @@ export default function GalleryInfo() {
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Title */}
         <div className="text-center space-y-2">
-          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl block font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
             Gallery Highlights
           </h2>
-          <p className="text-gray-400 text-sm md:text-base">
+          <p className="text-gray-400 block text-sm md:text-base">
             A blend of moments, emotions, and artistry — all in one reel.
           </p>
         </div>
@@ -97,7 +97,7 @@ export default function GalleryInfo() {
             {galleryItems.map((item, i) => (
               <motion.div
                 key={item.id}
-                className={`relative flex-shrink-0 w-48 sm:w-60 md:w-52 h-52 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer group transition-all duration-700 ${
+                className={`relative flex-shrink-0 w-48 block sm:w-60 md:w-52 h-52 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer group transition-all duration-700 ${
                   i % 2 === 0
                     ? "md:translate-y-2"
                     : i % 3 === 0
@@ -119,7 +119,7 @@ export default function GalleryInfo() {
                 <motion.img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full block object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 {/* Overlay Fade */}
@@ -142,8 +142,8 @@ export default function GalleryInfo() {
                     <Heart className="w-5 h-5 text-pink-400" />
                   </motion.div>
 
-                  <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
-                  <p className="text-gray-300 text-xs">{item.info}</p>
+                  <h3 className="text-sm font-semibold mb-1 block">{item.title}</h3>
+                  <p className="text-gray-300 text-xs block">{item.info}</p>
                 </motion.div>
               </motion.div>
             ))}

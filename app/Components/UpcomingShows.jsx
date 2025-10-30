@@ -49,7 +49,7 @@ export default function UpcomingShows() {
       className="bg-black text-white py-24 px-6 md:px-20 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto space-y-10">
-        <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-extrabold block text-center bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
           Upcoming Shows
         </h2>
 
@@ -76,7 +76,7 @@ export default function UpcomingShows() {
                     <motion.img
                       src={show.image}
                       alt={show.title}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                      className="w-full h-full block object-cover transition-transform duration-700 hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                   </div>
@@ -84,20 +84,20 @@ export default function UpcomingShows() {
                   {/* Content */}
                   <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
                     <div className="space-y-3">
-                      <h3 className="text-2xl font-bold">{show.title}</h3>
+                      <h3 className="text-2xl block font-bold">{show.title}</h3>
 
                       <div className="flex items-center space-x-2 text-gray-300">
-                        <Calendar className="w-4 h-4 text-lime-400" />
+                        <Calendar className="w-4 h-4 block text-lime-400" />
                         <span>{show.date}</span>
                       </div>
 
                       <div className="flex items-center space-x-2 text-gray-300">
-                        <MapPin className="w-4 h-4 text-green-400" />
+                        <MapPin className="w-4 h-4 block text-green-400" />
                         <span>{show.location}</span>
                       </div>
 
                       <div className="flex items-center space-x-2 text-gray-300">
-                        <Music2 className="w-4 h-4 text-lime-400" />
+                        <Music2 className="w-4 h-4 block text-lime-400" />
                         <span className="text-sm italic">
                           {show.artists}
                         </span>
@@ -106,7 +106,7 @@ export default function UpcomingShows() {
 
                     {/* Footer */}
                     <div className="flex items-center justify-between pt-4 border-t border-lime-400/20">
-                      <div className="flex items-center space-x-2 text-gray-400">
+                      <div className="flex block items-center space-x-2 text-gray-400">
                         <Users className="w-4 h-4 text-lime-400" />
                         <span>2.4K attending</span>
                       </div>
@@ -119,9 +119,9 @@ export default function UpcomingShows() {
                           backgroundColor: "rgb(132,204,22)",
                           color: "#000",
                         }}
-                        className="flex items-center space-x-2 px-4 py-2 border border-lime-400 text-lime-400 rounded-lg text-sm font-semibold transition"
+                        className="flex items-center block space-x-2 px-4 py-2 border border-lime-400 text-lime-400 rounded-lg text-sm font-semibold transition"
                       >
-                        <Ticket className="w-4 h-4" />
+                        <Ticket className="w-4 h-4 block" />
                         <span>Get Tickets</span>
                       </motion.a>
                     </div>

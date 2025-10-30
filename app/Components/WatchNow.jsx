@@ -45,10 +45,10 @@ export default function WatchNow() {
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Section Title */}
         <div className="text-center space-y-2">
-          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-extrabold block bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
             Watch Now
           </h2>
-          <p className="text-gray-400 text-sm md:text-base">
+          <p className="text-gray-400 text-sm block md:text-base">
             Catch the latest music videos, live sessions, and behind-the-scenes
             moments.
           </p>
@@ -78,7 +78,7 @@ export default function WatchNow() {
                     <motion.img
                       src={video.thumbnail}
                       alt={video.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-110"
                     />
 
                     {/* Dark Overlay */}
@@ -89,11 +89,11 @@ export default function WatchNow() {
                       whileHover={{ scale: 1.2 }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <PlayCircle className="w-16 h-16 text-lime-400 opacity-90 group-hover:opacity-100 transition" />
+                      <PlayCircle className="w-16 h-16 block text-lime-400 opacity-90 group-hover:opacity-100 transition" />
                     </motion.div>
 
                     {/* Duration Tag */}
-                    <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-xs px-3 py-1 rounded-full flex items-center space-x-1 text-lime-400 font-semibold">
+                    <div className="absolute bottom-3 block right-3 bg-black/60 backdrop-blur-sm text-xs px-3 py-1 rounded-full flex items-center space-x-1 text-lime-400 font-semibold">
                       <Clock className="w-3 h-3" />
                       <span>{video.duration}</span>
                     </div>
@@ -101,15 +101,15 @@ export default function WatchNow() {
 
                   {/* Content */}
                   <div className="p-5 flex flex-col justify-between space-y-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 block">
                       <h3 className="text-lg font-semibold">{video.title}</h3>
 
                       <div className="flex items-center space-x-4 text-sm text-gray-400">
-                        <div className="flex items-center space-x-1">
+                        <div className="flex items-center block space-x-1">
                           <Eye className="w-4 h-4 text-lime-400" />
                           <span>{video.views} views</span>
                         </div>
-                        <div className="flex items-center space-x-1">
+                        <div className="flex items-center block space-x-1">
                           <Calendar className="w-4 h-4 text-green-400" />
                           <span>{video.date}</span>
                         </div>
@@ -123,9 +123,9 @@ export default function WatchNow() {
                         backgroundColor: "rgb(132,204,22)",
                         color: "#000",
                       }}
-                      className="self-start px-4 py-2 border border-lime-400 text-lime-400 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2"
+                      className="self-start px-4 py-2 block border border-lime-400 text-lime-400 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2"
                     >
-                      <PlayCircle className="w-4 h-4" />
+                      <PlayCircle className="w-4 h-4 block" />
                       <span>Watch Video</span>
                     </motion.a>
                   </div>
