@@ -21,7 +21,6 @@ export default function RootLayout({ children }) {
         className={`${poppins.variable} antialiased bg-gray-50 font-sans`}
       >
         <Navbar />
-        <HomePage />
         <main className="min-h-screen">{children}</main>
         <footer className="p-4 text-center text-gray-500 text-sm">
           © {new Date().getFullYear()} TemplateHub. All rights reserved.

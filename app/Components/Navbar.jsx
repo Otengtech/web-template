@@ -83,7 +83,7 @@ export default function ArtistNavbar() {
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
       <nav
         className="fixed top-0 left-0 w-full z-40 bg-white/10 backdrop-blur-2xl border-b border-white/20 
-                   shadow-sm"
+                  "
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
@@ -91,7 +91,7 @@ export default function ArtistNavbar() {
             href="/"
             className="flex items-center gap-2 text-xl font-extrabold"
           >
-            <div className="w-3 h-3 text-gray-700 rounded-full animate-pulse"></div>
+            <div className="w-3 h-3 text-gray-100 rounded-full animate-pulse"></div>
             FLIP MUSIC
           </Link>
 
@@ -100,7 +100,7 @@ export default function ArtistNavbar() {
             <Link
               href="/"
               className={`${
-                pathname === "/" ? "text-gray-700" : "text-gray-400 hover:text-gray-500"
+                pathname === "/" ? "text-gray-100" : "text-gray-50 hover:text-gray-100"
               } transition`}
             >
               Home
@@ -112,8 +112,8 @@ export default function ArtistNavbar() {
                 href={`/${item.toLowerCase()}`}
                 className={`${
                   pathname === `/${item.toLowerCase()}`
-                    ? "text-gray-500"
-                    : "text-gray-700 hover:text-gray-400"
+                    ? "text-gray-100"
+                    : "text-gray-50 hover:text-gray-100"
                 } transition`}
               >
                 {item}

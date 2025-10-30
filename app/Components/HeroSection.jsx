@@ -18,10 +18,10 @@ export default function HeroSection() {
         </p>
 
         <div className="flex flex-wrap gap-3 pt-2">
-          <button className="px-6 sm:px-5 py-3 sm:py-2.5 font-semibold bg-gray-900 hover:bg-gray-800 text-white transition-all shadow-lg text-sm sm:text-base">
+          <button className="px-6 sm:px-5 py-3 sm:py-2.5 cursor-pointer font-semibold bg-gray-900 hover:bg-gray-800 text-white transition-all shadow-lg text-sm sm:text-base">
             Listen Now
           </button>
-          <button className="px-6 sm:px-5 py-3 sm:py-2.5 font-semibold border border-white hover:bg-white transition-all text-sm sm:text-base">
+          <button className="px-6 sm:px-5 py-3 sm:py-2.5 cursor-pointer font-semibold border border-white hover:text-gray-700 hover:bg-white transition-all text-sm sm:text-base">
             View Projects
           </button>
         </div>
