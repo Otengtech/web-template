@@ -83,16 +83,16 @@ export default function ArtistNavbar() {
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
       <nav
         className="fixed top-0 left-0 w-full z-40 bg-white/10 backdrop-blur-2xl border-b border-white/20 
-                   shadow-[inset_0_0_0.5px_rgba(255,255,255,0.3),0_4px_30px_rgba(0,0,0,0.2)]"
+                   shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
+            className="flex items-center gap-2 text-xl font-extrabold"
           >
-            <div className="w-3 h-3 bg-lime-400 rounded-full animate-pulse"></div>
-            Flip
+            <div className="w-3 h-3 text-gray-700 rounded-full animate-pulse"></div>
+            FLIP MUSIC
           </Link>
 
           {/* Desktop Menu */}
@@ -100,7 +100,7 @@ export default function ArtistNavbar() {
             <Link
               href="/"
               className={`${
-                pathname === "/" ? "text-lime-300" : "text-white/90 hover:text-lime-300"
+                pathname === "/" ? "text-gray-700" : "text-gray-400 hover:text-gray-500"
               } transition`}
             >
               Home
@@ -112,8 +112,8 @@ export default function ArtistNavbar() {
                 href={`/${item.toLowerCase()}`}
                 className={`${
                   pathname === `/${item.toLowerCase()}`
-                    ? "text-lime-300"
-                    : "text-white/90 hover:text-lime-300"
+                    ? "text-gray-500"
+                    : "text-gray-700 hover:text-gray-400"
                 } transition`}
               >
                 {item}
@@ -124,13 +124,13 @@ export default function ArtistNavbar() {
             <div className="relative" ref={accountRef}>
               <button
                 onClick={() => setAccountMenu((prev) => !prev)}
-                className="text-lime-300 hover:text-yellow-200"
+                className="text-gray-700 cursor-pointer hover:text-gray-500"
               >
                 <User size={22} />
               </button>
 
               <div
-                className={`absolute top-12 right-0 w-64 p-5 bg-white/10 border border-white/20 backdrop-blur-xl 
+                className={`absolute top-12 right-0 w-64 p-5 bg-black/10 border border-white/20 backdrop-blur-xl 
                             shadow-xl rounded-2xl transition-all duration-300 ${
                               accountMenu
                                 ? "translate-y-0 opacity-100"
