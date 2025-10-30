@@ -82,7 +82,7 @@ export default function ArtistNavbar() {
     <>
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
       <nav
-        className="fixed top-0 left-0 w-full z-40 bg-white/20 backdrop-blur-2xl border-b border-white/20 
+        className="fixed top-0 left-0 w-full z-40 bg-black/20 backdrop-blur-2xl border-b border-white/20 
                   "
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -91,7 +91,7 @@ export default function ArtistNavbar() {
             href="/"
             className="flex items-center gap-2 text-xl font-extrabold"
           >
-            <div className="text-white">
+            <div className="text-lime-300">
             FLIP MUSIC</div>
           </Link>
 
@@ -100,7 +100,7 @@ export default function ArtistNavbar() {
             <Link
               href="/"
               className={`${
-                pathname === "/" ? "text-gray-100" : "text-gray-50 hover:text-gray-100"
+                pathname === "/" ? "text-lime-300" : "text-lime-300 hover:text-lime-200"
               } transition`}
             >
               Home
@@ -112,8 +112,8 @@ export default function ArtistNavbar() {
                 href={`/${item.toLowerCase()}`}
                 className={`${
                   pathname === `/${item.toLowerCase()}`
-                    ? "text-gray-100"
-                    : "text-gray-50 hover:text-gray-100"
+                    ? "text-lime-300"
+                    : "text-lime-300 hover:text-lime-200"
                 } transition`}
               >
                 {item}
