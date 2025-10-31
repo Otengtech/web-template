@@ -3,37 +3,43 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { X, Download } from "lucide-react";
+import p1 from "@/app/Assets/p1.jpg";
+import p2 from "@/app/Assets/p2.jpg";
+import p3 from "@/app/Assets/p3.jpg";
+import p4 from "@/app/Assets/p4.jpg";
+import p5 from "@/app/Assets/p5.jpg";
+import p6 from "@/app/Assets/p6.jpg";
 
 const galleryItems = [
   {
     id: 1,
     title: "Studio Moments",
-    image:
-      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=800&q=80",
+    image:p2,
   },
   {
     id: 2,
     title: "On Stage Energy",
-    image:
-      "https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=800&q=80",
+    image:p3,
   },
   {
     id: 3,
     title: "Behind the Scenes",
-    image:
-      "https://images.unsplash.com/photo-1485579149621-3123dd979885?auto=format&fit=crop&w=800&q=80",
+    image:p4,
   },
   {
     id: 4,
     title: "Music Video Shoot",
-    image:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+    image:p5,
   },
   {
     id: 5,
     title: "Live Studio Band",
-    image:
-      "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=800&q=80",
+    image:p6,
+  },
+  {
+    id: 6,
+    title: "Live Studio Band",
+    image:p1,
   },
 ];
 

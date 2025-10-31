@@ -13,16 +13,17 @@ export default function Footer() {
   const socialLinks = [
     { icon: <FaInstagram />, href: "#", color: "text-pink-400" },
     { icon: <FaTwitter />, href: "#", color: "text-blue-400" },
-    { icon: <FaYoutube />, href: "#", color: "text-red-500" },
+    { icon: <FaYoutube />, href: "https://youtube.com/@westboyflip?si=wOWlyseItorqDayq", color: "text-red-500" },
     { icon: <FaSpotify />, href: "#", color: "text-green-400" },
   ];
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Music", href: "#" },
-    { name: "Shows", href: "#" },
-    { name: "Gallery", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "Music", href: "/music" },
+    { name: "Projects", href: "/projects" },
+    { name: "Merch", href: "/merch" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -93,9 +94,8 @@ export default function Footer() {
           <h3 className="text-lg font-semibold text-lime-400 mb-4">About</h3>
           <ul className="space-y-2 text-gray-400 text-sm">
             <li>📍 Accra, Ghana</li>
-            <li>📞 +233 555 123 456</li>
-            <li>📧 info@flipmusic.com</li>
-            <li>🕒 Mon – Sat: 9:00 AM – 6:00 PM</li>
+            <li>📞 +233 599 554 506</li>
+            <li>📧 wezebuilo62@gmail.com</li>
           </ul>
         </div>
 

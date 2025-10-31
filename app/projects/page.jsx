@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import p1 from "@/app/Assets/p1.jpg";
+import p2 from "@/app/Assets/p2.jpg";
+import p3 from "@/app/Assets/p3.jpg";
 
 const projects = [
   {
@@ -11,8 +14,7 @@ const projects = [
     year: 2025,
     description:
       "A futuristic blend of Afrobeat and electronic sounds — produced and mastered for Flip Music Records.",
-    image:
-      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80",
+    image:p1,
   },
   {
     id: 2,
@@ -21,8 +23,7 @@ const projects = [
     year: 2024,
     description:
       "A high-energy live performance tour capturing the pulse of Lagos’ vibrant nightlife scene.",
-    image:
-      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=800&q=80",
+    image:p2,
   },
   {
     id: 3,
@@ -31,38 +32,7 @@ const projects = [
     year: 2025,
     description:
       "A multi-artist collaboration merging soul, jazz, and Afro-fusion into one timeless sound.",
-    image:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "Studio 54 Sessions",
-    category: "Recording Project",
-    year: 2023,
-    description:
-      "An intimate studio recording session capturing raw, live performances with authentic vibes.",
-    image:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
-    title: "Oceanic Flow",
-    category: "Music Video",
-    year: 2024,
-    description:
-      "A visual masterpiece blending motion, color, and rhythm to express freedom through sound.",
-    image:
-      "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 6,
-    title: "Soundwave Experience",
-    category: "Virtual Performance",
-    year: 2025,
-    description:
-      "An immersive 3D concert experience powered by interactive visuals and digital soundscapes.",
-    image:
-      "https://images.unsplash.com/photo-1533236897111-3e94666b2edf?auto=format&fit=crop&w=800&q=80",
+    image:p3,
   },
 ];
 

@@ -19,7 +19,7 @@ export default function ArtistNavbar() {
   const pathname = usePathname();
 
   const navItems = ["About", "Music", "Projects", "Merch", "Contact"];
-  const mobileNavItems = ["About", "Music", "Projects", "Merch", "Contact", "Newsletter"];
+  const mobileNavItems = ["About", "Music", "Projects", "Merch", "Contact"];
 
   const bottomLinks = [
     { href: "/", icon: <Home size={20} />, label: "Home" },

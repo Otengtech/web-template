@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaSpotify, FaApple, FaYoutube } from "react-icons/fa";
 import { SiAudiomack, SiTidal } from "react-icons/si";
+import p1 from "@/app/Assets/p1.jpg";
+import p2 from "@/app/Assets/p2.jpg";
+import p3 from "@/app/Assets/p3.jpg";
+import p4 from "@/app/Assets/p4.jpg";
+import p5 from "@/app/Assets/p5.jpg";
+import p6 from "@/app/Assets/p6.jpg";
 
 const songs = [
   {
@@ -12,8 +18,7 @@ const songs = [
     genre: "Ambient",
     year: 2024,
     plays: "1.2M",
-    cover:
-      "https://images.unsplash.com/photo-1485579149621-3123dd979885?auto=format&fit=crop&w=800&q=80",
+    cover:p1,
   },
   {
     id: 2,
@@ -21,8 +26,7 @@ const songs = [
     genre: "Afrobeat",
     year: 2025,
     plays: "870K",
-    cover:
-      "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=800&q=80",
+    cover:p2,
   },
   {
     id: 3,
@@ -30,8 +34,7 @@ const songs = [
     genre: "Urban Pop",
     year: 2023,
     plays: "2.5M",
-    cover:
-      "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=800&q=80",
+    cover:p3,
   },
   {
     id: 4,
@@ -39,8 +42,7 @@ const songs = [
     genre: "Electronic",
     year: 2022,
     plays: "3.1M",
-    cover:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+    cover:p4,
   },
   {
     id: 5,
@@ -48,8 +50,7 @@ const songs = [
     genre: "R&B",
     year: 2024,
     plays: "945K",
-    cover:
-      "https://images.unsplash.com/photo-1518972559570-7cc1309f3229?auto=format&fit=crop&w=800&q=80",
+    cover:p5,
   },
   {
     id: 6,
@@ -57,8 +58,7 @@ const songs = [
     genre: "Hip-Hop",
     year: 2025,
     plays: "1.8M",
-    cover:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
+    cover:p6,
   },
 ];
 

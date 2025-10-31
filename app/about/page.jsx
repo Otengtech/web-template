@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Picture from "@/app/Assets/p4.jpg";
 import { Music, Award, Mic2, Headphones } from "lucide-react";
 
 const AboutPage = () => {
@@ -18,7 +19,7 @@ const AboutPage = () => {
           className="relative w-full md:w-1/2"
         >
           <Image
-            src="https://images.unsplash.com/photo-1607697987723-c0d4d1fbd9c4?auto=format&fit=crop&w=900&q=80"
+            src={Picture}
             alt="Artist performing"
             width={600}
             height={600}
