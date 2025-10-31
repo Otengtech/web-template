@@ -113,6 +113,7 @@ export default function Footer() {
             Get exclusive updates, music releases, and event news.
           </p>
 
+          {/* Input + Button */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -131,7 +132,6 @@ export default function Footer() {
                 required
               />
             </div>
-
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
