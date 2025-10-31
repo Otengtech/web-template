@@ -15,6 +15,8 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
   const socialLinks = [
     { icon: <FaInstagram />, href: "#", color: "text-pink-400" },
     { icon: <FaTwitter />, href: "#", color: "text-blue-400" },
@@ -42,7 +44,7 @@ export default function Footer() {
     setMessage("");
 
     try {
-      const res = await fetch("/api/newsletter", {
+      const res = await fetch(`${baseUrl}/api/newsletter`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

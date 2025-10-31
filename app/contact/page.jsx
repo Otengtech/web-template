@@ -20,6 +20,8 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
   // ---------- Handle Submit ----------
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ const ContactPage = () => {
     setStatus({ type: "", message: "" });
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${baseUrl}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
