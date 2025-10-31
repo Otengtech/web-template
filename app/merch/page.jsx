@@ -2,50 +2,26 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Hoodie from "@/app/Assets/hoodie.avif";
+import Tshirt from "@/app/Assets/tshirt.avif";
+import Vinyl from "@/app/Assets/vinyl.avif";
 
 const merchItems = [
   {
     id: 1,
     title: "Flip Nation Hoodie",
     category: "Apparel",
-    image:
-      "https://images.unsplash.com/photo-1600181954081-3c29c58c53c6?auto=format&fit=crop&w=800&q=80",
-  },
+    image:Hoodie  },
   {
     id: 2,
     title: "Signature Logo T-Shirt",
     category: "Apparel",
-    image:
-      "https://images.unsplash.com/photo-1586864387783-559f08fcdc2d?auto=format&fit=crop&w=800&q=80",
-  },
+    image:Tshirt  },
   {
     id: 3,
     title: "Limited Edition Vinyl",
     category: "Music Collectibles",
-    image:
-      "https://images.unsplash.com/photo-1607271620154-c7e6c6c56a03?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "Tour Cap 2025",
-    category: "Accessories",
-    image:
-      "https://images.unsplash.com/photo-1602810318383-e386cc2a3f3e?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
-    title: "Autographed Poster",
-    category: "Collectibles",
-    image:
-      "https://images.unsplash.com/photo-1616627457881-cc2fbaad2f26?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 6,
-    title: "Flip Music Tote Bag",
-    category: "Merch Essentials",
-    image:
-      "https://images.unsplash.com/photo-1618354691516-14a9ef64b5f4?auto=format&fit=crop&w=800&q=80",
-  },
+    image:Vinyl  },
 ];
 
 const MerchPage = () => {
@@ -122,20 +98,6 @@ const MerchPage = () => {
           ))}
         </div>
       </section>
-
-      {/* ===== FOOTNOTE ===== */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="text-center text-gray-500 text-sm pb-16"
-      >
-        <p className="text-left">
-          All merchandise will be available for worldwide shipping. Follow Flip
-          Music on social media for updates on product drops and exclusive
-          collections.
-        </p>
-      </motion.div>
     </div>
   );
 };
