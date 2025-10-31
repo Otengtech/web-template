@@ -9,7 +9,7 @@ export default function HeroSection() {
     <section className="relative flex flex-col md:flex-row items-center justify-between min-h-screen px-6 sm:px-8 md:px-16 lg:px-24 bg-gradient-to-r from-green-500 to-lime-400 text-white overflow-hidden pt-20 sm:pt-24">
       {/* Left Content */}
       <div className="flex-1 text-left space-y-5 md:space-y-6">
-        <h1 className="text-5xl text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight drop-shadow-md">
+        <h1 className="text-5xl text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl font-extrabold drop-shadow-md">
           Feel the <span className="text-white">Vibes</span> of Art & Sound
         </h1>
 
@@ -31,19 +31,15 @@ export default function HeroSection() {
           </Link>
         </div>
       </div>
-
+      
       {/* Right Content - Hero Image */}
-      <div className="flex-1 flex justify-center md:mt-0">
+      <div className="flex-1 flex justify-center mt-3 md:mt-0">
         <Image
           src={HeroImage}
           alt="Artist Hero"
-          className="w-[280px] sm:w-[320px] object-cover md:w-[450px] lg:w-[550px] drop-shadow-2xl rounded-2xl hover:scale-105 transition-transform duration-500"
-          priority
+          className="w-[300px] h-[320px] sm:w-[320px] md:w-[450px] md:h-[520px] lg:w-[550px] object-cover object-top rounded-2xl drop-shadow-lg drop-shadow-white hover:scale-105 transition-transform duration-500 bg-transparent"
         />
       </div>
-
-      {/* Subtle glowing background effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 via-lime-300/10 to-yellow-200/10 blur-3xl -z-10" />
     </section>
   );
 }

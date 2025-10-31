@@ -75,27 +75,6 @@ export default function ArtistNavbar() {
                 {item}
               </Link>
             ))}
-
-            {/* Newsletter (Desktop Only) */}
-            <form
-              onSubmit={handleSubscribe}
-              className="flex items-center bg-white/10 border border-lime-300/30 rounded-full px-3 py-1.5 space-x-2"
-            >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Newsletter email"
-                className="bg-transparent text-sm text-lime-100 placeholder-gray-400 focus:outline-none w-40"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-gradient-to-r from-green-400 to-lime-400 text-black text-xs font-semibold px-3 py-1 rounded-full hover:scale-105 transition"
-              >
-                Subscribe
-              </button>
-            </form>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -163,30 +142,6 @@ export default function ArtistNavbar() {
           onClick={() => setIsOpen(false)}
         />
       )}
-
-      {/* ─── BOTTOM NAVBAR (Mobile Only) ─────────────────────────────── */}
-      <div
-        className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-md 
-                   bg-black/40 backdrop-blur-2xl border border-white/20 rounded-3xl
-                   shadow-[0_0_25px_rgba(132,204,22,0.3)] flex justify-around items-center 
-                   py-3 text-lime-300 z-50"
-      >
-        {bottomLinks.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex flex-col items-center text-xs transition-all ${
-                isActive ? "scale-110 text-yellow-300" : "hover:scale-105"
-              }`}
-            >
-              {item.icon}
-              {item.label}
-            </Link>
-          );
-        })}
-      </div>
     </>
   );
 }
