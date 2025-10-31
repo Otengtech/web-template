@@ -105,7 +105,7 @@ export default function LatestDrops() {
               onMouseLeave={() => setPaused(false)}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="relative flex-shrink-0 w-72 h-72 rounded-2xl overflow-hidden group cursor-pointer"
+              className="relative flex-shrink-0 w-72 h-80 rounded-2xl overflow-hidden group cursor-pointer"
             >
               {/* Image */}
               <motion.img

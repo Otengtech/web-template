@@ -31,13 +31,14 @@ export default function HeroSection() {
           </Link>
         </div>
       </div>
-      
+
       {/* Right Content - Hero Image */}
-      <div className="flex-1 flex justify-center mt-3 md:mt-0">
+      <div className="flex-1 flex justify-center mt-2 sm:mt-3 md:mt-0">
         <Image
           src={HeroImage}
           alt="Artist Hero"
-          className="w-[300px] h-[320px] sm:w-[320px] md:w-[450px] md:h-[520px] lg:w-[550px] object-cover object-top rounded-2xl drop-shadow-lg drop-shadow-white hover:scale-105 transition-transform duration-500 bg-transparent"
+          className="w-[280px] h-[300px] sm:w-[320px] md:w-[450px] md:h-[520px] lg:w-[550px] object-cover object-top rounded-2xl drop-shadow-lg hover:scale-105 transition-transform duration-500 bg-transparent"
+          priority
         />
       </div>
     </section>

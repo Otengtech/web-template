@@ -51,11 +51,11 @@ const ContactPage = () => {
             <div className="space-y-4 text-gray-400">
               <div className="flex items-center gap-3">
                 <Mail className="text-lime-400" />
-                <span>info@flipmusicworld.com</span>
+                <span>wezebuilo62@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="text-lime-400" />
-                <span>+233 555 123 456</span>
+                <span>+233 599 554 506</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="text-lime-400" />
@@ -77,7 +77,7 @@ const ContactPage = () => {
                 <Twitter size={24} />
               </a>
               <a
-                href="#"
+                href="https://youtube.com/@westboyflip?si=wOWlyseItorqDayq"
                 className="text-gray-400 hover:text-lime-400 transition-colors"
               >
                 <Youtube size={24} />
