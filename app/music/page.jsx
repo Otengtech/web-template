@@ -62,7 +62,7 @@ const songs = [
   },
 ];
 
-const MusicPage = () => {
+const page = () => {
   return (
     <div className="bg-black text-white overflow-hidden min-h-screen">
       {/* ===== HEADER ===== */}
@@ -173,4 +173,4 @@ const MusicPage = () => {
   );
 };
 
-export default MusicPage;
+export default page;

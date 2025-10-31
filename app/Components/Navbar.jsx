@@ -1,98 +1,52 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Home,
   Music,
   Box,
   ShoppingBag,
   Phone,
-  User,
   Menu,
   X,
-  Camera,
-  Star,
-  BookOpen,
-  Lightbulb,
 } from "lucide-react";
 
 export default function ArtistNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [accountMenu, setAccountMenu] = useState(false);
-  const [userName, setUserName] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("name") || "" : ""
-  );
-  const [userEmail, setUserEmail] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("email") || "" : ""
-  );
-  const [profileImage, setProfileImage] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("profileImage") || null : null
-  );
-
+  const [email, setEmail] = useState("");
   const pathname = usePathname();
-  const router = useRouter();
-  const accountRef = useRef(null);
-
-  // Handle outside click for account dropdown
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (accountRef.current && !accountRef.current.contains(e.target)) {
-        setAccountMenu(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      setProfileImage(reader.result);
-      localStorage.setItem("profileImage", reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setUserName("");
-    setUserEmail("");
-    setProfileImage(null);
-    setAccountMenu(false);
-    setIsOpen(false);
-    router.push("/login");
-  };
 
   const navItems = ["About", "Music", "Projects", "Merch", "Contact"];
-  const mobileNavItems = ["About", "Contact", "Terms"];
+  const mobileNavItems = ["About", "Music", "Projects", "Merch", "Contact", "Newsletter"];
 
   const bottomLinks = [
     { href: "/", icon: <Home size={20} />, label: "Home" },
-    { href: "/pages/music", icon: <Music size={20} />, label: "Music" },
+    { href: "/music", icon: <Music size={20} />, label: "Music" },
     { href: "/projects", icon: <Box size={20} />, label: "Projects" },
     { href: "/merch", icon: <ShoppingBag size={20} />, label: "Merch" },
     { href: "/contact", icon: <Phone size={20} />, label: "Contact" },
   ];
 
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email) return;
+    alert(`Subscribed successfully: ${email}`);
+    setEmail("");
+  };
+
   return (
     <>
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
-      <nav
-        className="fixed top-0 left-0 w-full z-40 bg-black/20 backdrop-blur-2xl border-b border-white/20 
-                  "
-      >
+      <nav className="fixed top-0 left-0 w-full z-40 bg-black/20 backdrop-blur-2xl border-b border-white/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 text-xl font-extrabold"
           >
-            <div className="text-lime-300">
-            FLIP MUSIC</div>
+            <div className="text-lime-300">FLIP MUSIC</div>
           </Link>
 
           {/* Desktop Menu */}
@@ -100,7 +54,9 @@ export default function ArtistNavbar() {
             <Link
               href="/"
               className={`${
-                pathname === "/" ? "text-lime-300" : "text-lime-300 hover:text-lime-200"
+                pathname === "/"
+                  ? "text-lime-300"
+                  : "text-lime-300 hover:text-lime-200"
               } transition`}
             >
               Home
@@ -120,59 +76,26 @@ export default function ArtistNavbar() {
               </Link>
             ))}
 
-            {/* Account Menu */}
-            <div className="relative" ref={accountRef}>
+            {/* Newsletter (Desktop Only) */}
+            <form
+              onSubmit={handleSubscribe}
+              className="flex items-center bg-white/10 border border-lime-300/30 rounded-full px-3 py-1.5 space-x-2"
+            >
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Newsletter email"
+                className="bg-transparent text-sm text-lime-100 placeholder-gray-400 focus:outline-none w-40"
+                required
+              />
               <button
-                onClick={() => setAccountMenu((prev) => !prev)}
-                className="text-gray-100 cursor-pointer hover:text-gray-500"
+                type="submit"
+                className="bg-gradient-to-r from-green-400 to-lime-400 text-black text-xs font-semibold px-3 py-1 rounded-full hover:scale-105 transition"
               >
-                <User size={22} />
+                Subscribe
               </button>
-
-              <div
-                className={`absolute top-12 right-0 w-64 p-5 bg-black/10 border border-white/20 backdrop-blur-xl 
-                            shadow-xl rounded-2xl transition-all duration-300 ${
-                              accountMenu
-                                ? "translate-y-0 opacity-100"
-                                : "-translate-y-4 opacity-0 pointer-events-none"
-                            }`}
-              >
-                <div className="flex flex-col items-center text-white space-y-3">
-                  <div className="relative">
-                    {profileImage ? (
-                      <img
-                        src={profileImage}
-                        alt="Profile"
-                        className="w-16 h-16 rounded-full object-cover border-2 border-lime-400"
-                      />
-                    ) : (
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-xl font-semibold">
-                        {userName ? userName.charAt(0).toUpperCase() : "G"}
-                      </div>
-                    )}
-                    <label className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 cursor-pointer shadow hover:bg-gray-100">
-                      <Camera className="text-lime-500" size={14} />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                      />
-                    </label>
-                  </div>
-                  <div className="font-bold">{userName || "Guest"}</div>
-                  <div className="text-xs text-gray-200">
-                    {userEmail || "No email provided"}
-                  </div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full py-2 bg-lime-500/80 text-black font-semibold rounded-full hover:bg-lime-400 transition"
-                  >
-                    {userEmail ? "Logout" : "Login"}
-                  </button>
-                </div>
-              </div>
-            </div>
+            </form>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -193,42 +116,43 @@ export default function ArtistNavbar() {
                     }`}
       >
         <div className="flex flex-col h-full p-6 space-y-6">
-          <div className="flex items-center space-x-3">
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Profile"
-                className="w-10 h-10 rounded-full border border-lime-400 object-cover"
-              />
-            ) : (
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-semibold">
-                {userName ? userName.charAt(0).toUpperCase() : "G"}
-              </div>
-            )}
-            <div>
-              <p className="font-semibold">{userName || "Guest"}</p>
-              <p className="text-xs text-gray-300">{userEmail || "No email"}</p>
-            </div>
-          </div>
+          <div className="text-xl font-bold text-lime-300">Menu</div>
 
           {mobileNavItems.map((item) => (
             <Link
               key={item}
               href={`/${item.toLowerCase()}`}
               onClick={() => setIsOpen(false)}
-              className="hover:text-lime-400 transition"
+              className="hover:text-lime-400 transition text-sm"
             >
               {item}
             </Link>
           ))}
 
-          <div className="mt-auto">
-            <button
-              onClick={handleLogout}
-              className="w-full py-2 bg-gradient-to-r from-lime-500 to-yellow-400 text-black rounded-md font-semibold hover:scale-[1.02] transition"
+          {/* Newsletter (Mobile Only) */}
+          <div className="mt-auto pt-6 border-t border-white/20">
+            <p className="text-sm text-gray-300 mb-2">
+              Subscribe to our newsletter
+            </p>
+            <form
+              onSubmit={handleSubscribe}
+              className="flex flex-col gap-3"
             >
-              {userEmail ? "Logout" : "Login"}
-            </button>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+                className="bg-black/40 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:border-lime-400 outline-none transition-all"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold py-2 rounded-md hover:scale-105 transition"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
       </div>
