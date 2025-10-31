@@ -3,6 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { X, Download } from "lucide-react";
+import Image from "next/image"; // ✅ Import Next.js Image
+
+// ✅ Import images from your assets
 import p1 from "@/app/Assets/p1.jpg";
 import p2 from "@/app/Assets/p2.jpg";
 import p3 from "@/app/Assets/p3.jpg";
@@ -11,36 +14,12 @@ import p5 from "@/app/Assets/p5.jpg";
 import p6 from "@/app/Assets/p6.jpg";
 
 const galleryItems = [
-  {
-    id: 1,
-    title: "Studio Moments",
-    image: p2,
-  },
-  {
-    id: 2,
-    title: "On Stage Energy",
-    image: p3,
-  },
-  {
-    id: 3,
-    title: "Behind the Scenes",
-    image: p4,
-  },
-  {
-    id: 4,
-    title: "Music Video Shoot",
-    image: p5,
-  },
-  {
-    id: 5,
-    title: "Live Studio Band",
-    image: p6,
-  },
-  {
-    id: 6,
-    title: "Live Studio Band",
-    image: p1,
-  },
+  { id: 1, title: "Studio Moments", image: p2 },
+  { id: 2, title: "On Stage Energy", image: p3 },
+  { id: 3, title: "Behind the Scenes", image: p4 },
+  { id: 4, title: "Music Video Shoot", image: p5 },
+  { id: 5, title: "Live Studio Band", image: p6 },
+  { id: 6, title: "Recording Vibes", image: p1 },
 ];
 
 export default function GalleryInfo() {
@@ -48,7 +27,7 @@ export default function GalleryInfo() {
   const [paused, setPaused] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  // Auto-scroll (looping horizontally)
+  // ✅ Auto-scroll effect
   useEffect(() => {
     const container = scrollRef.current;
     let interval;
@@ -68,7 +47,7 @@ export default function GalleryInfo() {
     return () => clearInterval(interval);
   }, [paused]);
 
-  // Animation variants for smooth entry
+  // ✅ Animation variants
   const itemVariants = {
     hidden: { opacity: 0, x: 50 },
     visible: (i) => ({
@@ -101,7 +80,7 @@ export default function GalleryInfo() {
           </p>
         </motion.div>
 
-        {/* Horizontal Gallery */}
+        {/* ✅ Horizontal Scrollable Gallery */}
         <motion.div
           ref={scrollRef}
           className="flex space-x-6 overflow-x-auto no-scrollbar"
@@ -121,10 +100,12 @@ export default function GalleryInfo() {
               onMouseLeave={() => setPaused(false)}
               className="relative flex-shrink-0 w-[45vw] sm:w-[40vw] md:w-[30vw] lg:w-[28vw] xl:w-[25vw] h-64 md:h-72 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer transition-all duration-700"
             >
-              <motion.img
+              {/* ✅ Optimized Image */}
+              <Image
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover block transition-transform duration-700 hover:scale-110"
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60" />
             </motion.div>
@@ -132,7 +113,7 @@ export default function GalleryInfo() {
         </motion.div>
       </div>
 
-      {/* Fullscreen Image Modal */}
+      {/* ✅ Fullscreen Modal */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -148,10 +129,12 @@ export default function GalleryInfo() {
               exit={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
             >
-              <img
+              <Image
                 src={selected.image}
                 alt={selected.title}
-                className="w-full h-full object-contain rounded-lg shadow-lg"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-contain rounded-lg shadow-lg"
               />
 
               {/* Close Button */}
@@ -164,7 +147,7 @@ export default function GalleryInfo() {
 
               {/* Download Button */}
               <a
-                href={selected.image}
+                href={selected.image.src}
                 download
                 className="absolute top-4 left-4 p-2 bg-lime-500/80 hover:bg-lime-400 text-black rounded-full transition"
               >
