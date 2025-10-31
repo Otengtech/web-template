@@ -149,7 +149,7 @@ const AboutPage = () => {
               title: "Midnight Drive",
               desc: "A smooth blend of Afrobeat rhythms and late-night melodies.",
               cover:
-                "https://images.unsplash.com/photo-1606066533909-20a98d89a3c5?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500",
             },
             {
               title: "Golden Hours",

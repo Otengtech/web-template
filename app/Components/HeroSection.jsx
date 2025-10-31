@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import HeroImage from "@/app/Assets/HeroImage.png";
+import HeroImage from "@/app/Assets/hero-pic.png";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (

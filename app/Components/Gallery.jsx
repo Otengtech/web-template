@@ -14,32 +14,32 @@ const galleryItems = [
   {
     id: 1,
     title: "Studio Moments",
-    image:p2,
+    image: p2,
   },
   {
     id: 2,
     title: "On Stage Energy",
-    image:p3,
+    image: p3,
   },
   {
     id: 3,
     title: "Behind the Scenes",
-    image:p4,
+    image: p4,
   },
   {
     id: 4,
     title: "Music Video Shoot",
-    image:p5,
+    image: p5,
   },
   {
     id: 5,
     title: "Live Studio Band",
-    image:p6,
+    image: p6,
   },
   {
     id: 6,
     title: "Live Studio Band",
-    image:p1,
+    image: p1,
   },
 ];
 
