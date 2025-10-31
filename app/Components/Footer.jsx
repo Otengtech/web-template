@@ -39,8 +39,8 @@ export default function Footer() {
         viewport={{ once: true }}
       >
         {/* Brand Section */}
-        <div className="space-y-4 text-left md:text-left">
-          <div className="flex items-center justify-start md:justify-start space-x-3">
+        <div className="space-y-4 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start space-x-3">
             <div className="p-2 bg-gradient-to-br from-green-500 to-lime-400 rounded-full">
               <FaMusic className="w-6 h-6 text-black" />
             </div>
@@ -62,6 +62,7 @@ export default function Footer() {
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 200 }}
                 className={`transition text-2xl ${social.color}`}
+                aria-label="Social Link"
               >
                 {social.icon}
               </motion.a>
@@ -76,7 +77,11 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2 text-gray-400 text-sm">
             {navLinks.map((link, i) => (
-              <motion.li key={i} whileHover={{ x: 4, color: "#bef264" }}>
+              <motion.li
+                key={i}
+                whileHover={{ x: 4, color: "#bef264" }}
+                transition={{ duration: 0.2 }}
+              >
                 <a href={link.href}>{link.name}</a>
               </motion.li>
             ))}
@@ -108,21 +113,34 @@ export default function Footer() {
             Get exclusive updates, music releases, and event news.
           </p>
 
-          {/* Input + Button */}
-          <div className="flex items-center bg-gray-900 border border-lime-400/20 rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-lime-400 transition-all">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-grow bg-transparent text-gray-300 text-sm px-4 py-3 outline-none placeholder-gray-400"
-            />
-          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const email = e.target.email.value;
+              if (email) alert(`Subscribed successfully: ${email}`);
+              e.target.reset();
+            }}
+            className="space-y-3"
+          >
+            <div className="flex items-center bg-transparent border border-lime-400/30 rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-lime-400 transition-all">
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                className="flex-grow bg-transparent text-gray-300 text-sm px-4 py-3 outline-none placeholder-gray-500"
+                required
+              />
+            </div>
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-lime-400 w-full mt-2 text-black font-semibold rounded-full px-5 py-3"
+              className="bg-gradient-to-r from-green-500 to-lime-400 w-full text-black font-semibold rounded-full px-5 py-3 shadow-md"
+              type="submit"
             >
               Subscribe
             </motion.button>
+          </form>
         </motion.div>
       </motion.div>
 
@@ -131,7 +149,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <motion.div
-        className="text-center text-gray-500 text-xs"
+        className="text-center pb-16 md:pb-0 text-gray-500 text-xs"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
