@@ -130,7 +130,7 @@ const MerchPage = () => {
         transition={{ duration: 1 }}
         className="text-center text-gray-500 text-sm pb-16"
       >
-        <p>
+        <p className="text-left">
           All merchandise will be available for worldwide shipping. Follow Flip
           Music on social media for updates on product drops and exclusive
           collections.

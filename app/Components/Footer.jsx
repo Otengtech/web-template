@@ -39,8 +39,8 @@ export default function Footer() {
         viewport={{ once: true }}
       >
         {/* Brand Section */}
-        <div className="space-y-4 text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start space-x-3">
+        <div className="space-y-4 text-left md:text-left">
+          <div className="flex items-center justify-start md:justify-start space-x-3">
             <div className="p-2 bg-gradient-to-br from-green-500 to-lime-400 rounded-full">
               <FaMusic className="w-6 h-6 text-black" />
             </div>

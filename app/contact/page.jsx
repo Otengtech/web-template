@@ -7,7 +7,7 @@ const ContactPage = () => {
   return (
     <div className="bg-black text-white overflow-hidden min-h-screen">
       {/* ===== HEADER ===== */}
-      <section className="py-24 text-center px-6 md:px-20">
+      <section className="pt-24 pb-10 text-center px-6 md:px-20">
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}

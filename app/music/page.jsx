@@ -66,7 +66,7 @@ const page = () => {
   return (
     <div className="bg-black text-white overflow-hidden min-h-screen">
       {/* ===== HEADER ===== */}
-      <section className="py-24 px-6 md:px-20 text-center">
+      <section className="pt-24 pb-10 px-6 md:px-20 text-center">
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ const page = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-gray-400 mt-6 text-sm md:text-base max-w-2xl mx-auto"
+          className="text-gray-400 mt-6 text-sm text-left md:text-base max-w-2xl mx-auto"
         >
           Explore Flip Music’s sonic world — rhythm, emotion, and energy
           harmonized into every beat. Stream the latest releases across your

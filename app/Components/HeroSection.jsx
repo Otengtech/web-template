@@ -13,17 +13,21 @@ export default function HeroSection() {
         </h1>
 
         <p className="text-md sm:text-lg md:text-xl text-white/90 max-w-md md:max-w-lg">
-          Explore my latest music, creative projects, and exclusive merch drops.  
+          Explore my latest music, creative projects, and exclusive merch drops.
           Join the journey — where sound meets soul.
         </p>
 
         <div className="flex flex-wrap gap-3 pt-2">
-          <button className="px-6 sm:px-5 py-3 sm:py-2.5 cursor-pointer font-semibold bg-gray-900 hover:bg-gray-800 text-white transition-all shadow-lg text-sm sm:text-base">
-            Listen Now
-          </button>
-          <button className="px-6 sm:px-5 py-3 sm:py-2.5 cursor-pointer font-semibold border border-white hover:text-gray-700 hover:bg-white transition-all text-sm sm:text-base">
-            View Projects
-          </button>
+          <Link href="/music">
+            <button className="px-6 sm:px-5 py-3 sm:py-2.5 cursor-pointer font-semibold bg-gray-900 hover:bg-gray-800 text-white transition-all shadow-lg text-sm sm:text-base">
+              Listen Now
+            </button>
+          </Link>
+          <Link href="/projects">
+            <button className="px-6 sm:px-5 py-3 sm:py-2.5 cursor-pointer font-semibold border border-white hover:text-gray-700 hover:bg-white transition-all text-sm sm:text-base">
+              View Projects
+            </button>
+          </Link>
         </div>
       </div>
 
