@@ -1,9 +1,52 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Instagram, Twitter, Youtube } from "lucide-react";
 
 const ContactPage = () => {
+  // ---------- State Management ----------
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" });
+
+  // ---------- Handle Input ----------
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // ---------- Handle Submit ----------
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || "Failed to send message");
+
+      setStatus({ type: "success", message: data.message });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      setStatus({ type: "error", message: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ---------- UI ----------
   return (
     <div className="bg-black text-white overflow-hidden min-h-screen">
       {/* ===== HEADER ===== */}
@@ -64,16 +107,10 @@ const ContactPage = () => {
             </div>
 
             <div className="flex gap-6 pt-6">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-lime-400 transition-colors"
-              >
+              <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
                 <Instagram size={24} />
               </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-lime-400 transition-colors"
-              >
+              <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
                 <Twitter size={24} />
               </a>
               <a
@@ -87,6 +124,7 @@ const ContactPage = () => {
 
           {/* ===== RIGHT FORM ===== */}
           <motion.form
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -95,11 +133,12 @@ const ContactPage = () => {
              shadow-[0_0_20px_rgba(163,230,53,0.15)] space-y-6 mx-auto backdrop-blur-sm"
           >
             <div>
-              <label className="block text-sm text-gray-400 mb-2">
-                Full Name
-              </label>
+              <label className="block text-sm text-gray-400 mb-2">Full Name</label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Enter your name"
                 className="w-full bg-transparent border border-lime-400/30 rounded-full px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500"
@@ -108,11 +147,12 @@ const ContactPage = () => {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">
-                Email Address
-              </label>
+              <label className="block text-sm text-gray-400 mb-2">Email Address</label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Enter your email"
                 className="w-full bg-transparent border border-lime-400/30 rounded-full px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500"
@@ -121,10 +161,11 @@ const ContactPage = () => {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">
-                Message
-              </label>
+              <label className="block text-sm text-gray-400 mb-2">Message</label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="Write your message..."
                 rows={4}
                 className="w-full bg-transparent border border-lime-400/30 rounded-2xl px-4 py-3 text-sm 
@@ -133,14 +174,28 @@ const ContactPage = () => {
               ></textarea>
             </div>
 
+            {/* Status Message */}
+            {status.message && (
+              <p
+                className={`text-sm ${
+                  status.type === "success" ? "text-lime-400" : "text-red-500"
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold 
-               py-3 rounded-full shadow-lg transition-all"
+              disabled={loading}
+              className={`w-full bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold 
+               py-3 rounded-full shadow-lg transition-all ${
+                 loading ? "opacity-70 cursor-not-allowed" : ""
+               }`}
               type="submit"
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </motion.button>
           </motion.form>
         </div>

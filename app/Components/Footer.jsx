@@ -8,8 +8,13 @@ import {
   FaSpotify,
   FaMusic,
 } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
   const socialLinks = [
     { icon: <FaInstagram />, href: "#", color: "text-pink-400" },
     { icon: <FaTwitter />, href: "#", color: "text-blue-400" },
@@ -30,6 +35,30 @@ export default function Footer() {
     { name: "Contact", href: "/contact" },
   ];
 
+  // ✅ Newsletter handler
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      setMessage(data.message || data.error);
+      setEmail("");
+    } catch (err) {
+      console.error(err);
+      setMessage("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="bg-black text-white pt-20 pb-10 px-6 md:px-20 relative border-t border-lime-400/20 overflow-hidden">
       {/* Top Glow Line */}
@@ -40,33 +69,32 @@ export default function Footer() {
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-left md:text-center"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
         {/* Brand + Socials */}
         <div className="space-y-4">
           <div className="flex items-center text-left md:justify-center space-x-3">
-            <div className="p-2 bg-gradient-to-br text-left from-green-500 to-lime-400 rounded-full">
+            <div className="p-2 bg-gradient-to-br from-green-500 to-lime-400 rounded-full">
               <FaMusic className="w-6 h-6 text-black" />
             </div>
-            <h2 className="text-2xl font-bold text-left bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
               Flip Music
             </h2>
           </div>
 
-          <p className="text-gray-400 text-sm text-left leading-relaxed max-w-xs">
+          <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
             Discover rhythm, passion, and creativity. We bring beats to life
             through sound and vision — connecting artists and fans worldwide.
           </p>
 
-          {/* Social Links */}
-          <div className="flex justify-start md:justify-start space-x-5 pt-2">
+          <div className="flex justify-start space-x-5 pt-2">
             {socialLinks.map((social, i) => (
               <motion.a
                 key={i}
                 href={social.href}
                 whileHover={{ scale: 1.2, rotate: 5 }}
-                transition={{ type: 'spring', stiffness: 200 }}
+                transition={{ type: "spring", stiffness: 200 }}
                 className={`transition text-2xl ${social.color}`}
                 aria-label="Social Link"
               >
@@ -76,7 +104,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links + About (flex on mobile) */}
+        {/* Quick Links + About */}
         <div className="flex flex-col sm:flex-row md:flex-row gap-10 sm:gap-16 justify-start md:justify-center">
           {/* Quick Links */}
           <div className="text-left">
@@ -87,7 +115,7 @@ export default function Footer() {
               {navLinks.map((link, i) => (
                 <motion.li
                   key={i}
-                  whileHover={{ x: 4, color: '#bef264' }}
+                  whileHover={{ x: 4, color: "#bef264" }}
                   transition={{ duration: 0.2 }}
                 >
                   <a href={link.href}>{link.name}</a>
@@ -98,7 +126,9 @@ export default function Footer() {
 
           {/* Info Section */}
           <div>
-            <h3 className="text-lg font-semibold text-left text-lime-400 mb-4">About</h3>
+            <h3 className="text-lg font-semibold text-left text-lime-400 mb-4">
+              About
+            </h3>
             <ul className="space-y-2 text-gray-400 text-left text-sm">
               <li>📍 Accra, Ghana</li>
               <li>📞 +233 599 554 506</li>
@@ -121,21 +151,14 @@ export default function Footer() {
             Get exclusive updates, music releases, and event news.
           </p>
 
-          {/* Input + Button */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const email = e.target.email.value;
-              if (email) alert(`Subscribed successfully: ${email}`);
-              e.target.reset();
-            }}
-            className="space-y-3"
-          >
+          <form onSubmit={handleSubscribe} className="space-y-3">
             <div className="flex items-center bg-transparent border border-lime-400/30 rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-lime-400 transition-all">
               <input
                 type="email"
                 name="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-grow bg-transparent text-gray-300 text-sm px-4 py-3 outline-none placeholder-gray-500"
                 required
               />
@@ -143,16 +166,28 @@ export default function Footer() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              disabled={loading}
               className="bg-gradient-to-r from-green-500 to-lime-400 w-full text-black font-semibold rounded-full px-5 py-3 shadow-md"
               type="submit"
             >
-              Subscribe
+              {loading ? "Subscribing..." : "Subscribe"}
             </motion.button>
+
+            {/* Success/Error Message */}
+            {message && (
+              <p
+                className={`text-sm mt-2 ${
+                  message.includes("success") ? "text-lime-400" : "text-red-400"
+                }`}
+              >
+                {message}
+              </p>
+            )}
           </form>
         </motion.div>
       </motion.div>
 
-      {/* Divider Line */}
+      {/* Divider */}
       <div className="w-full border-t border-lime-400/10 mt-14 mb-6" />
 
       {/* Copyright */}
