@@ -72,7 +72,7 @@ export default function ArtistNavbar() {
 
   const bottomLinks = [
     { href: "/", icon: <Home size={20} />, label: "Home" },
-    { href: "/music", icon: <Music size={20} />, label: "Music" },
+    { href: "/pages/music", icon: <Music size={20} />, label: "Music" },
     { href: "/projects", icon: <Box size={20} />, label: "Projects" },
     { href: "/merch", icon: <ShoppingBag size={20} />, label: "Merch" },
     { href: "/contact", icon: <Phone size={20} />, label: "Contact" },

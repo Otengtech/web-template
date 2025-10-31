@@ -19,7 +19,7 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-@keyframes appear {
+/* @keyframes appear {
   from {
     opacity: 0;
     clip-path: inset(100% 100% 0 0);
@@ -34,4 +34,4 @@ body {
   animation: appear linear;
   animation-timeline: view();
   animation-range: entry 0% cover 40%;
-}
+} */
