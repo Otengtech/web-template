@@ -44,7 +44,7 @@ export default function Footer() {
         const baseUrl = "https://flipmusic.onrender.com";
 
     try {
-      const res = await fetch(`${baseUrl}/api/newsletter`, {
+      const res = await fetch(`https://flipmusic.onrender.com/api/newsletter`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

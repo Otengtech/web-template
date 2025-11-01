@@ -29,7 +29,7 @@ const ContactPage = () => {
     setStatus({ type: "", message: "" });
 
     try {
-      const res = await fetch(`${baseUrl}/api/contact`, {
+      const res = await fetch(`https://flipmusic.onrender.com/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
