@@ -5,50 +5,45 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Instagram, Twitter, Youtube } from "lucide-react";
 
 const ContactPage = () => {
-  // ---------- State Management ----------
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState({ type: "", message: "" });
 
-  // ---------- Handle Input ----------
+  const [status, setStatus] = useState({ loading: false, success: null, error: null });
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const baseUrl = "https://flipmusic.onrender.com";
-
-  // ---------- Handle Submit ----------
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus({ type: "", message: "" });
+    setStatus({ loading: true, success: null, error: null });
 
     try {
-      const res = await fetch(`https://flipmusic.onrender.com/api/contact`, {
+      const res = await fetch(`${baseUrl}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Server error (${res.status}): ${text}`);
+      }
+
       const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || "Failed to send message");
-
-      setStatus({ type: "success", message: data.message });
+      setStatus({ loading: false, success: data?.message || "Message sent successfully!", error: null });
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
-      setStatus({ type: "error", message: err.message });
-    } finally {
-      setLoading(false);
+      console.error(err);
+      setStatus({ loading: false, success: null, error: "Failed to send message. Please try again later." });
     }
   };
 
-  // ---------- UI ----------
   return (
     <div className="bg-black text-white overflow-hidden min-h-screen">
       {/* ===== HEADER ===== */}
@@ -115,10 +110,7 @@ const ContactPage = () => {
               <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
                 <Twitter size={24} />
               </a>
-              <a
-                href="https://youtube.com/@westboyflip?si=wOWlyseItorqDayq"
-                className="text-gray-400 hover:text-lime-400 transition-colors"
-              >
+              <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
                 <Youtube size={24} />
               </a>
             </div>
@@ -139,9 +131,9 @@ const ContactPage = () => {
               <input
                 type="text"
                 name="name"
+                placeholder="Enter your name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter your name"
                 className="w-full bg-transparent border border-lime-400/30 rounded-full px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500"
                 required
@@ -153,9 +145,9 @@ const ContactPage = () => {
               <input
                 type="email"
                 name="email"
+                placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
                 className="w-full bg-transparent border border-lime-400/30 rounded-full px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500"
                 required
@@ -166,39 +158,30 @@ const ContactPage = () => {
               <label className="block text-sm text-gray-400 mb-2">Message</label>
               <textarea
                 name="message"
-                value={formData.message}
-                onChange={handleChange}
                 placeholder="Write your message..."
                 rows={4}
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full bg-transparent border border-lime-400/30 rounded-2xl px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500 resize-none"
                 required
               ></textarea>
             </div>
 
-            {/* Status Message */}
-            {status.message && (
-              <p
-                className={`text-sm ${
-                  status.type === "success" ? "text-lime-400" : "text-red-500"
-                }`}
-              >
-                {status.message}
-              </p>
-            )}
-
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              disabled={loading}
-              className={`w-full bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold 
-               py-3 rounded-full shadow-lg transition-all ${
-                 loading ? "opacity-70 cursor-not-allowed" : ""
-               }`}
+              disabled={status.loading}
+              className="w-full bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold 
+               py-3 rounded-full shadow-lg transition-all disabled:opacity-60"
               type="submit"
             >
-              {loading ? "Sending..." : "Send Message"}
+              {status.loading ? "Sending..." : "Send Message"}
             </motion.button>
+
+            {/* Feedback Messages */}
+            {status.success && <p className="text-green-400 text-center">{status.success}</p>}
+            {status.error && <p className="text-red-500 text-center">{status.error}</p>}
           </motion.form>
         </div>
       </section>
