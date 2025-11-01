@@ -15,7 +15,7 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const socialLinks = [
     { icon: <FaInstagram />, href: "#", color: "text-pink-400" },
