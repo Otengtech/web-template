@@ -2,10 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { X, Download } from "lucide-react";
-import Image from "next/image"; // ✅ Import Next.js Image
+import { X, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
-// ✅ Import images from your assets
+// ✅ Import your images
 import p1 from "@/app/Assets/p1.jpg";
 import p2 from "@/app/Assets/p2.jpg";
 import p3 from "@/app/Assets/p3.jpg";
@@ -25,9 +25,9 @@ const galleryItems = [
 export default function GalleryInfo() {
   const scrollRef = useRef(null);
   const [paused, setPaused] = useState(false);
-  const [selected, setSelected] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  // ✅ Auto-scroll effect
+  // ✅ Auto-scroll horizontally
   useEffect(() => {
     const container = scrollRef.current;
     let interval;
@@ -47,7 +47,25 @@ export default function GalleryInfo() {
     return () => clearInterval(interval);
   }, [paused]);
 
-  // ✅ Animation variants
+  // ✅ Keyboard navigation (←, →, Esc)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedIndex === null) return;
+      if (e.key === "Escape") setSelectedIndex(null);
+      if (e.key === "ArrowRight")
+        setSelectedIndex((prev) => (prev + 1) % galleryItems.length);
+      if (e.key === "ArrowLeft")
+        setSelectedIndex(
+          (prev) => (prev - 1 + galleryItems.length) % galleryItems.length
+        );
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex]);
+
+  const selected = selectedIndex !== null ? galleryItems[selectedIndex] : null;
+
+  // ✅ Motion variants
   const itemVariants = {
     hidden: { opacity: 0, x: 50 },
     visible: (i) => ({
@@ -95,12 +113,11 @@ export default function GalleryInfo() {
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              onClick={() => setSelected(item)}
+              onClick={() => setSelectedIndex(i)}
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
               className="relative flex-shrink-0 w-[45vw] sm:w-[40vw] md:w-[30vw] lg:w-[28vw] xl:w-[25vw] h-64 md:h-72 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer transition-all duration-700"
             >
-              {/* ✅ Optimized Image */}
               <Image
                 src={item.image}
                 alt={item.title}
@@ -123,23 +140,24 @@ export default function GalleryInfo() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="relative w-[90vw] md:w-[70vw] lg:w-[60vw] max-h-[90vh]"
+              className="relative flex items-center justify-center w-[90vw] md:w-[70vw] lg:w-[60vw] max-h-[90vh]"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
             >
+              {/* Centered image */}
               <Image
                 src={selected.image}
                 alt={selected.title}
                 width={1200}
                 height={800}
-                className="w-full h-auto object-contain rounded-lg shadow-lg"
+                className="rounded-lg shadow-lg max-h-[85vh] w-auto object-contain"
               />
 
               {/* Close Button */}
               <button
-                onClick={() => setSelected(null)}
+                onClick={() => setSelectedIndex(null)}
                 className="absolute top-4 right-4 p-2 bg-black/60 rounded-full hover:bg-black/80 transition"
               >
                 <X className="w-6 h-6 text-white" />
@@ -153,6 +171,28 @@ export default function GalleryInfo() {
               >
                 <Download className="w-6 h-6" />
               </a>
+
+              {/* Prev Button */}
+              <button
+                onClick={() =>
+                  setSelectedIndex(
+                    (prev) => (prev - 1 + galleryItems.length) % galleryItems.length
+                  )
+                }
+                className="absolute left-3 md:left-6 p-2 md:p-3 bg-black/50 rounded-full hover:bg-lime-400/70 transition"
+              >
+                <ChevronLeft className="w-6 h-6 text-white" />
+              </button>
+
+              {/* Next Button */}
+              <button
+                onClick={() =>
+                  setSelectedIndex((prev) => (prev + 1) % galleryItems.length)
+                }
+                className="absolute right-3 md:right-6 p-2 md:p-3 bg-black/50 rounded-full hover:bg-lime-400/70 transition"
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </button>
             </motion.div>
           </motion.div>
         )}

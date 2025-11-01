@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Play } from "lucide-react";
+import { Play, Music2 } from "lucide-react";
+import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 
 const drops = [
@@ -41,9 +42,8 @@ const drops = [
 export default function LatestDrops() {
   const [paused, setPaused] = useState(false);
 
-  // Track if section is in view
   const { ref, inView } = useInView({
-    triggerOnce: false, // animate every time it enters view
+    triggerOnce: false,
     threshold: 0.2,
   });
 
@@ -54,14 +54,14 @@ export default function LatestDrops() {
 
     if (!paused && container) {
       scrollInterval = setInterval(() => {
-        container.scrollLeft += 1.2; // scroll speed
+        container.scrollLeft += 1.2;
         if (
           container.scrollLeft + container.clientWidth >=
           container.scrollWidth
         ) {
-          container.scrollLeft = 0; // loop back
+          container.scrollLeft = 0;
         }
-      }, 16); // ~60fps
+      }, 16);
     }
 
     return () => clearInterval(scrollInterval);
@@ -83,16 +83,29 @@ export default function LatestDrops() {
   return (
     <section
       ref={ref}
-      className="bg-black text-white py-24 px-4 overflow-hidden w-full"
+      className="bg-black text-white py-24 px-4 sm:px-8 md:px-16 overflow-hidden w-full"
     >
-      <div className="max-w-7xl mx-auto space-y-10 w-full">
-        <h2 className="text-4xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent text-center">
-          Latest Drops
-        </h2>
-
+      <div className="max-w-7xl mx-auto space-y-10 w-full text-center">
+        {/* === Heading & Subtitle === */}
         <motion.div
           id="drops-scroll"
-          className="flex space-x-6 overflow-x-auto w-full no-scrollbar"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="space-y-4"
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
+            Latest Drops
+          </h2>
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+            Discover the freshest sounds of the season — new vibes, bold beats,
+            and pure energy from the studio to your playlist.
+          </p>
+        </motion.div>
+
+        {/* === Scrollable Cards === */}
+        <motion.div
+          id="drops-scroll"
+          className="flex space-x-6 overflow-x-auto w-full no-scrollbar py-6"
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
@@ -105,7 +118,7 @@ export default function LatestDrops() {
               onMouseLeave={() => setPaused(false)}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="relative flex-shrink-0 w-72 h-80 rounded-2xl overflow-hidden group cursor-pointer"
+              className="relative flex-shrink-0 w-64 sm:w-72 h-80 rounded-2xl overflow-hidden group cursor-pointer border border-lime-400/20 shadow-[0_0_20px_rgba(163,230,53,0.05)] hover:shadow-[0_0_25px_rgba(163,230,53,0.2)] transition-all duration-700"
             >
               {/* Image */}
               <motion.img
@@ -115,16 +128,16 @@ export default function LatestDrops() {
               />
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
 
               {/* Music Type */}
               <span className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-lime-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow-md">
                 {drop.type}
               </span>
 
-              {/* Bottom Content */}
-              <div className="absolute bottom-4 left-4 flex flex-col space-y-2">
-                <h3 className="text-xl font-bold">{drop.name}</h3>
+              {/* Bottom Info */}
+              <div className="absolute bottom-4 left-4 flex flex-col space-y-2 text-left">
+                <h3 className="text-lg sm:text-xl font-bold">{drop.name}</h3>
                 <a
                   href="#"
                   className="flex items-center space-x-2 text-sm font-semibold text-lime-400 hover:text-green-400 transition"
@@ -135,6 +148,20 @@ export default function LatestDrops() {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* === Explore More Button === */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <Link href="/music">
+            <button className="inline-flex cursor-pointer items-center gap-2 px-8 py-3 bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold rounded-full shadow-md hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] hover:scale-105 transition-all duration-300">
+              <Music2 size={18} />
+              Explore More Music
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

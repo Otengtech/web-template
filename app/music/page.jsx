@@ -105,7 +105,7 @@ const page = () => {
                   alt={song.title}
                   width={400}
                   height={400}
-                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-56 object-cover object-top group-hover:scale-110 transition-transform duration-700"
                 />
               </div>
 
