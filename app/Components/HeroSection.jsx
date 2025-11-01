@@ -88,7 +88,7 @@ export default function HeroSection() {
             src={HeroImage}
             alt="Artist Hero"
             priority
-            className="w-[300px] h-[300px] sm:w-[320px] md:w-[450px] md:h-[520px] lg:w-[550px] object-cover object-top rounded-2xl drop-shadow-lg hover:scale-105 transition-transform duration-500 bg-transparent"
+            className="w-[300px] h-[340px] sm:w-[320px] md:w-[450px] md:h-[520px] lg:w-[550px] object-cover object-top rounded-2xl drop-shadow-lg hover:scale-105 transition-transform duration-500 bg-transparent"
           />
         </div>
       </motion.div>

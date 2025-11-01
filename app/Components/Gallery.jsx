@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { X, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, Download, ChevronLeft, ChevronRight, GalleryVerticalIcon } from "lucide-react";
 import Image from "next/image";
 
 // ✅ Import your images
@@ -12,6 +12,7 @@ import p3 from "@/app/Assets/p3.jpg";
 import p4 from "@/app/Assets/p4.jpg";
 import p5 from "@/app/Assets/p5.jpg";
 import p6 from "@/app/Assets/p6.jpg";
+import Link from "next/link";
 
 const galleryItems = [
   { id: 1, title: "Studio Moments", image: p2 },
@@ -130,6 +131,16 @@ export default function GalleryInfo() {
         </motion.div>
       </div>
 
+      <motion.div className="text-center mt-6"
+      >
+        <Link href="/gallery">
+          <button className="inline-flex items-center cursor-pointer gap-2 px-8 py-3 bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold rounded-full shadow-md hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] hover:scale-105 transition-all duration-300">
+            <GalleryVerticalIcon size={18} />
+            Explore Full Gallery
+          </button>
+        </Link>
+      </motion.div>
+
       {/* ✅ Fullscreen Modal */}
       <AnimatePresence>
         {selected && (
@@ -176,7 +187,8 @@ export default function GalleryInfo() {
               <button
                 onClick={() =>
                   setSelectedIndex(
-                    (prev) => (prev - 1 + galleryItems.length) % galleryItems.length
+                    (prev) =>
+                      (prev - 1 + galleryItems.length) % galleryItems.length
                   )
                 }
                 className="absolute left-3 md:left-6 p-2 md:p-3 bg-black/50 rounded-full hover:bg-lime-400/70 transition"

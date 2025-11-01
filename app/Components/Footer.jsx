@@ -76,7 +76,7 @@ export default function Footer() {
       >
         {/* Brand + Socials */}
         <div className="space-y-4">
-          <div className="flex items-center text-left md:justify-center space-x-3">
+          <div className="flex items-center text-left md:justify-start space-x-3">
             <div className="p-2 bg-gradient-to-br from-green-500 to-lime-400 rounded-full">
               <FaMusic className="w-6 h-6 text-black" />
             </div>
@@ -194,7 +194,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <motion.div
-        className="text-gray-500 text-xs text-left md:text-center"
+        className="text-gray-500 text-xs text-center md:text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}

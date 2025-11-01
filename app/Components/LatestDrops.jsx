@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Play, Music2 } from "lucide-react";
 import Link from "next/link";
@@ -41,31 +41,27 @@ const drops = [
 
 export default function LatestDrops() {
   const [paused, setPaused] = useState(false);
+  const { ref, inView } = useInView({ threshold: 0.2 });
+  const controls = useAnimation();
 
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  });
-
-  // Auto-scroll functionality
+  // Handle animation play/pause
   useEffect(() => {
-    let scrollInterval;
-    const container = document.getElementById("drops-scroll");
-
-    if (!paused && container) {
-      scrollInterval = setInterval(() => {
-        container.scrollLeft += 1.2;
-        if (
-          container.scrollLeft + container.clientWidth >=
-          container.scrollWidth
-        ) {
-          container.scrollLeft = 0;
-        }
-      }, 16);
+    if (paused) {
+      controls.stop();
+    } else {
+      controls.start({
+        x: ["0%", "-50%"], // slide halfway since we duplicate items
+        transition: {
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "linear",
+            duration: 25, // adjust for speed
+          },
+        },
+      });
     }
-
-    return () => clearInterval(scrollInterval);
-  }, [paused]);
+  }, [paused, controls]);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 60 },
@@ -83,12 +79,11 @@ export default function LatestDrops() {
   return (
     <section
       ref={ref}
-      className="bg-black text-white py-24 px-4 sm:px-8 md:px-16 overflow-hidden w-full"
+      className="bg-black text-white py-10 md:py-24 px-4 sm:px-8 md:px-16 overflow-hidden w-full"
     >
       <div className="max-w-7xl mx-auto space-y-10 w-full text-center">
-        {/* === Heading & Subtitle === */}
+        {/* === Heading === */}
         <motion.div
-          id="drops-scroll"
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           className="space-y-4"
@@ -96,68 +91,73 @@ export default function LatestDrops() {
           <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
             Latest Drops
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-200 text-sm sm:text-base text-left md:text-lg max-w-2xl mx-auto">
             Discover the freshest sounds of the season — new vibes, bold beats,
             and pure energy from the studio to your playlist.
           </p>
         </motion.div>
 
-        {/* === Scrollable Cards === */}
-        <motion.div
-          id="drops-scroll"
-          className="flex space-x-6 overflow-x-auto w-full no-scrollbar py-6"
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+        {/* === Smooth Sliding Row === */}
+        <div
+          className="overflow-hidden w-full py-6"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
         >
-          {drops.map((drop, i) => (
-            <motion.div
-              key={drop.id}
-              custom={i}
-              variants={cardVariants}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="relative flex-shrink-0 w-64 sm:w-72 h-80 rounded-2xl overflow-hidden group cursor-pointer border border-lime-400/20 shadow-[0_0_20px_rgba(163,230,53,0.05)] hover:shadow-[0_0_25px_rgba(163,230,53,0.2)] transition-all duration-700"
-            >
-              {/* Image */}
-              <motion.img
-                src={drop.image}
-                alt={drop.name}
-                className="w-full h-full block object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+          <motion.div
+            className="flex space-x-6 w-max"
+            animate={controls}
+          >
+            {/* Duplicate drops twice for infinite loop */}
+            {[...drops, ...drops].map((drop, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="relative flex-shrink-0 w-64 sm:w-72 h-80 rounded-2xl overflow-hidden group cursor-pointer border border-lime-400/20 shadow-[0_0_20px_rgba(163,230,53,0.05)] hover:shadow-[0_0_25px_rgba(163,230,53,0.2)] transition-all duration-700"
+              >
+                {/* Image */}
+                <motion.img
+                  src={drop.image}
+                  alt={drop.name}
+                  className="w-full h-full block object-cover transition-transform duration-700 group-hover:scale-110"
+                />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
 
-              {/* Music Type */}
-              <span className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-lime-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow-md">
-                {drop.type}
-              </span>
+                {/* Music Type */}
+                <span className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-lime-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow-md">
+                  {drop.type}
+                </span>
 
-              {/* Bottom Info */}
-              <div className="absolute bottom-4 left-4 flex flex-col space-y-2 text-left">
-                <h3 className="text-lg sm:text-xl font-bold">{drop.name}</h3>
-                <a
-                  href="#"
-                  className="flex items-center space-x-2 text-sm font-semibold text-lime-400 hover:text-green-400 transition"
-                >
-                  <Play size={16} />
-                  <span>Listen Now →</span>
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                {/* Info */}
+                <div className="absolute bottom-4 left-4 flex flex-col space-y-2 text-left">
+                  <h3 className="text-lg sm:text-xl font-bold">{drop.name}</h3>
+                  <a
+                    href="#"
+                    className="flex items-center space-x-2 text-sm font-semibold text-lime-400 hover:text-green-400 transition"
+                  >
+                    <Play size={16} />
+                    <span>Listen Now →</span>
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
-        {/* === Explore More Button === */}
+        {/* === Explore Button === */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <Link href="/music">
-            <button className="inline-flex cursor-pointer items-center gap-2 px-8 py-3 bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold rounded-full shadow-md hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] hover:scale-105 transition-all duration-300">
+            <button className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold rounded-full shadow-md hover:shadow-[0_0_20px_rgba(163,230,53,0.4)] hover:scale-105 transition-all duration-300">
               <Music2 size={18} />
               Explore More Music
             </button>
