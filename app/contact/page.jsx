@@ -20,7 +20,7 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = "https://flipmusic.onrender.com";
 
   // ---------- Handle Submit ----------
   const handleSubmit = async (e) => {

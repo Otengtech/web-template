@@ -15,8 +15,6 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
   const socialLinks = [
     { icon: <FaInstagram />, href: "#", color: "text-pink-400" },
     { icon: <FaTwitter />, href: "#", color: "text-blue-400" },
@@ -43,6 +41,8 @@ export default function Footer() {
     setLoading(true);
     setMessage("");
 
+        const baseUrl = "https://flipmusic.onrender.com";
+
     try {
       const res = await fetch(`${baseUrl}/api/newsletter`, {
         method: "POST",
@@ -56,6 +56,7 @@ export default function Footer() {
     } catch (err) {
       console.error(err);
       setMessage("Something went wrong. Please try again.");
+      console.log(`The url is ${baseUrl}`)
     } finally {
       setLoading(false);
     }
