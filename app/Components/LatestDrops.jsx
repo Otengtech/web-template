@@ -113,10 +113,6 @@ export default function LatestDrops() {
                 key={i}
                 custom={i}
                 variants={cardVariants}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
                 className="relative flex-shrink-0 w-64 sm:w-72 h-80 rounded-2xl overflow-hidden group cursor-pointer border border-lime-400/20 shadow-[0_0_20px_rgba(163,230,53,0.05)] hover:shadow-[0_0_25px_rgba(163,230,53,0.2)] transition-all duration-700"
               >
                 {/* Image */}

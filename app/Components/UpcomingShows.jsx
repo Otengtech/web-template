@@ -71,8 +71,6 @@ export default function UpcomingShows() {
         {/* Cards Grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
         >
           {shows.map((show, i) => (
             <motion.div
