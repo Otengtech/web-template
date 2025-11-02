@@ -38,11 +38,23 @@ const shows = [
 ];
 
 export default function UpcomingShows() {
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.2 });
+  const { ref, inView } = useInView({
+    triggerOnce: false, // animate every time it re-enters viewport
+    threshold: 0.2,
+  });
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  // Animation variants for staggered entry
+  const cardVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.15,
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    }),
   };
 
   return (
@@ -50,61 +62,66 @@ export default function UpcomingShows() {
       ref={ref}
       className="bg-black text-white py-24 px-6 md:px-20 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto space-y-16">
+      <div className="max-w-7xl mx-auto space-y-10">
         {/* Section Title */}
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="text-4xl font-extrabold text-center bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent"
-        >
+        <h2 className="text-4xl font-extrabold text-center bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
           Upcoming Shows
-        </motion.h2>
+        </h2>
 
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Cards Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
           {shows.map((show, i) => (
             <motion.div
               key={show.id}
-              variants={fadeUp}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              className="relative h-96 rounded-3xl overflow-hidden shadow-lg group"
+              custom={i}
+              variants={cardVariants}
+              whileHover={{ scale: 1.03 }}
+              className="border border-lime-400/40 bg-black/60 rounded-2xl overflow-hidden shadow-lg hover:shadow-lime-500/20 transition-all duration-500 flex flex-col"
             >
-              {/* Background Image */}
-              <img
-                src={show.image}
-                alt={show.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold text-lime-400">{show.title}</h3>
-                <div className="text-gray-300 text-sm mt-1">
-                  <div className="flex items-center space-x-2">
+              {/* Image */}
+              <div className="relative h-48 overflow-hidden">
+                <motion.img
+                  src={show.image}
+                  alt={show.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold">{show.title}</h3>
+
+                  <div className="flex items-center space-x-2 text-gray-300">
                     <Calendar className="w-4 h-4 text-lime-400" />
                     <span>{show.date}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
+
+                  <div className="flex items-center space-x-2 text-gray-300">
                     <MapPin className="w-4 h-4 text-green-400" />
                     <span>{show.location}</span>
                   </div>
-                  <div className="flex items-center space-x-2 italic">
+
+                  <div className="flex items-center space-x-2 text-gray-300">
                     <Music2 className="w-4 h-4 text-lime-400" />
-                    <span>{show.artists}</span>
+                    <span className="text-sm italic">{show.artists}</span>
                   </div>
                 </div>
-                <a
-                  href={show.tickets}
-                  target="_blank"
-                  className="inline-block mt-4 px-5 py-2 bg-lime-400 text-black font-semibold rounded-full hover:bg-green-500 transition"
-                >
-                  Get Tickets
-                </a>
+
+                {/* Footer */}
+                <div className="flex items-center justify-between pt-4 border-t border-lime-400/20">
+                  <div className="flex items-center space-x-2 text-gray-400">
+                    <Users className="w-4 h-4 text-lime-400" />
+                    <span>2.4K attending</span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

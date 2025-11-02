@@ -10,21 +10,6 @@ export default function MiniAbout() {
 
   return (
     <section className="min-h-[70vh] bg-gradient-to-b from-gray-900 to-black text-white py-16 px-6 sm:px-10 flex flex-col md:flex-row items-center justify-center gap-10">
-      {/* === Artist Image === */}
-      <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-800"
-      >
-        <Image
-          src={p1}
-          alt="Artist portrait"
-          fill
-          className="object-cover hover:scale-105 transition-transform duration-700"
-        />
-      </motion.div>
-
       {/* === Artist Info === */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
@@ -36,15 +21,25 @@ export default function MiniAbout() {
           About the Artist
         </h2>
 
-        <p className="text-gray-300 mt-4 leading-relaxed text-sm md:text-base">
+        <p className="text-gray-300 mt-4 leading-relaxed text-left text-sm md:text-base">
           A visionary artist known for blending emotion, color, and rhythm into
           every piece. Through sound and visuals, their art explores human
           connection, identity, and the beauty found in everyday chaos.
-          <br />
-          <br />
-          This is just a glimpse into their creative world — there’s so much
-          more to uncover.
         </p>
+        {/* === Artist Image === */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-800"
+        >
+          <Image
+            src={p1}
+            alt="Artist portrait"
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-700"
+          />
+        </motion.div>
 
         <motion.button
           whileHover={{ scale: 1.05 }}
