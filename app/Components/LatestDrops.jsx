@@ -79,7 +79,7 @@ export default function LatestDrops() {
   return (
     <section
       ref={ref}
-      className="bg-black text-white py-10 md:py-24 px-4 sm:px-8 md:px-16 overflow-hidden w-full"
+      className="bg-black text-white py-10 md:py-24 px-6 sm:px-8 md:px-16 overflow-hidden w-full"
     >
       <div className="max-w-7xl mx-auto space-y-10 w-full text-center">
         {/* === Heading === */}
