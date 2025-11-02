@@ -35,7 +35,7 @@ export default function MiniAbout() {
         >
           <Image
             src={p1}
-            alt="Artist portrait"
+            alt="Artist portraits"
             fill
             className="object-cover hover:scale-105 transition-transform duration-700"
           />
