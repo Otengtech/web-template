@@ -39,7 +39,7 @@ export default function ArtistNavbar() {
   return (
     <>
       {/* ─── TOP NAVBAR ─────────────────────────────── */}
-      <nav className="fixed top-0 left-0 w-full z-40 bg-black/20 backdrop-blur-2xl border-b border-white/20">
+      <nav className="fixed top-0 left-0 w-full z-40 bg-black/20 backdrop-blur-3xl border-b border-white/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link

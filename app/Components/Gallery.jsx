@@ -113,7 +113,7 @@ export default function GalleryInfo() {
               onClick={() => setSelectedIndex(i)}
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
-              className="relative flex-shrink-0 w-[45vw] sm:w-[40vw] md:w-[30vw] lg:w-[28vw] xl:w-[25vw] h-64 md:h-72 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer transition-all duration-700"
+              className="relative flex-shrink-0 w-[42vw] sm:w-[40vw] md:w-[30vw] lg:w-[28vw] xl:w-[25vw] h-64 md:h-72 rounded-2xl overflow-hidden border border-lime-400/30 cursor-pointer transition-all duration-700"
             >
               <Image
                 src={item.image}

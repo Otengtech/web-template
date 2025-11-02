@@ -130,68 +130,6 @@ const AboutPage = () => {
           </motion.p>
         </div>
       </section>
-
-      {/* ===== SIGNATURE TRACKS ===== */}
-      <section className="py-24 bg-gray-950 px-6 md:px-20">
-        <motion.h2
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent"
-        >
-          Signature Tracks
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Midnight Drive",
-              desc: "A smooth blend of Afrobeat rhythms and late-night melodies.",
-              cover:
-                "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500",
-            },
-            {
-              title: "Golden Hours",
-              desc: "An introspective track exploring ambition, peace, and purpose.",
-              cover:
-                "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?auto=format&fit=crop&w=800&q=80",
-            },
-            {
-              title: "Heartbeat City",
-              desc: "A high-energy anthem inspired by urban life and connection.",
-              cover:
-                "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80",
-            },
-          ].map((track, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-900/50 rounded-2xl overflow-hidden border border-lime-400/20 hover:border-lime-400/50 transition-all shadow-md hover:shadow-lime-400/10"
-            >
-              <div className="relative">
-                <Image
-                  src={track.cover}
-                  alt={track.title}
-                  width={400}
-                  height={400}
-                  className="w-full h-56 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                  <Music className="text-lime-400" size={40} />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold">{track.title}</h3>
-                <p className="text-gray-400 text-sm mt-2">{track.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
     </div>
   );
 };

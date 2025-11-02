@@ -12,45 +12,80 @@ export async function POST(req) {
 
     // Validate email
     if (!email || !email.includes("@")) {
-      return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid email address" },
+        { status: 400 }
+      );
     }
 
     // Check if already subscribed
     const existing = await Newsletter.findOne({ email });
     if (existing) {
-      return NextResponse.json({ message: "You are already subscribed!" }, { status: 200 });
+      return NextResponse.json(
+        { message: "You are already subscribed!" },
+        { status: 200 }
+      );
     }
 
     // Save new subscriber
     await Newsletter.create({ email });
 
-    // === 1️⃣ Send welcome email to subscriber ===
+    // === 1️⃣ Send Welcome Email to Subscriber ===
     try {
       await resend.emails.send({
-        from: "Flip Music <onboarding@resend.dev>", // your verified sender
+        from: "Flip Music <onboarding@resend.dev>", // must be verified in Resend
         to: email,
-        subject: "Welcome to Flip Music Newsletter 🎵",
-        text: `Hey there! 🎶\n\nThanks for subscribing to Flip Music — you'll now get exclusive updates, new tracks, and behind-the-scenes content straight to your inbox.\n\nStay tuned,\nFlip Music Team`,
+        subject: "🎵 Welcome to Flip Music Newsletter!",
+        text: `
+Hey there! 👋
+
+Thanks for subscribing to the Flip Music newsletter.
+
+You’ll now receive updates on:
+- New releases 🎧
+- Exclusive behind-the-scenes content 🎬
+- Upcoming shows & collaborations 🎤
+
+Stay tuned and keep vibing with us!
+
+– Flip Music Team
+        `,
       });
-    } catch (mailError) {
-      console.error("Subscriber welcome email failed:", mailError);
+    } catch (welcomeError) {
+      console.error("Failed to send welcome email:", welcomeError);
     }
 
-    // === 2️⃣ Send notification email to you (the admin) ===
+    // === 2️⃣ Send Admin Notification Email ===
     try {
       await resend.emails.send({
         from: "Flip Music <onboarding@resend.dev>",
-        to: process.env.EMAIL_USER, // <== add this in your Render env vars
-        subject: "🎉 New Newsletter Subscriber!",
-        text: `A new user has joined your Flip Music newsletter list.\n\nSubscriber email: ${email}\n\nCheck your dashboard for details.`,
+        to: process.env.EMAIL_USER, // ✅ your admin email (e.g. flipmusic@gmail.com)
+        subject: "📩 New Newsletter Subscription",
+        text: `
+Hey Flip Music Admin,
+
+A new user has subscribed to your newsletter!
+
+📧 Subscriber Email: ${email}
+
+Time: ${new Date().toLocaleString()}
+
+You can check your MongoDB dashboard for the new entry.
+        `,
       });
-    } catch (adminMailError) {
-      console.error("Admin notification email failed:", adminMailError);
+    } catch (adminError) {
+      console.error("Failed to send admin notification email:", adminError);
     }
 
-    return NextResponse.json({ message: "Subscribed successfully!" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Subscribed successfully!" },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error("Newsletter error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error("Newsletter route error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
