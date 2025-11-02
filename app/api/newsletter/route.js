@@ -30,15 +30,7 @@ export async function POST(req) {
         from: "Flip Music <onboarding@resend.dev>", // your verified sender
         to: email,
         subject: "Welcome to Flip Music Newsletter 🎵",
-        html: `
-          <div style="font-family: Arial, sans-serif; padding: 16px; background: #f9f9f9;">
-            <h2 style="color:#1a1a1a;">Welcome to <span style="color:#ff0066;">Flip Music</span> 🎧</h2>
-            <p>Hey there,</p>
-            <p>Thanks for subscribing to <strong>Flip Music</strong>! We'll keep you updated with the latest tracks, artists, and musical vibes.</p>
-            <p style="margin-top: 24px;">Stay tuned,</p>
-            <p><strong>The Flip Music Team</strong></p>
-          </div>
-        `,
+        text: "Thanks for subscribing to Flip Music Newsletter, you will receive all update from us quickly.",
       });
     } catch (mailError) {
       console.error("Newsletter email send failed:", mailError);

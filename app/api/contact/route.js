@@ -24,7 +24,7 @@ export async function POST(req) {
         from: "Flip Music <onboarding@resend.dev>", // Resend's verified sender
         to: process.env.EMAIL_USER, // your admin email
         subject: `New Contact Message from ${name}`,
-        text: `From: ${name} (${email})\n\nMessage:\n${message}`,
+        text: `${name}, you sent a Message to ${process.env.EMAIL_USER} (\nYour Message:\n${message}`,
       });
     } catch (mailError) {
       console.error("Email sending failed:", mailError);
