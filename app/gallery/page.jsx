@@ -2,26 +2,29 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutGrid, Rows3, Download, X, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  LayoutGrid,
+  Rows3,
+  Download,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
-const images = [
-  "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0",
-  "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
-  "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce",
-  "https://images.unsplash.com/photo-1473187983305-f615310e7daa",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9",
-  "https://images.unsplash.com/photo-1501594907352-04cda38ebc29",
-  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f",
-  "https://images.unsplash.com/photo-1472214103451-9374bd1c798e",
-  "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
-  "https://images.unsplash.com/photo-1506765515384-028b60a970df",
-  "https://images.unsplash.com/photo-1503264116251-35a269479413",
-];
+// ✅ Local images (artist pictures)
+import p1 from "@/app/Assets/p1.jpg";
+import p2 from "@/app/Assets/p2.jpg";
+import p3 from "@/app/Assets/p3.jpg";
+import p4 from "@/app/Assets/p4.jpg";
+import p5 from "@/app/Assets/p5.jpg";
+import p6 from "@/app/Assets/p6.jpg";
+
+// ✅ Array of imported images
+const images = [p1, p2, p3, p4, p5, p6];
 
 export default function GalleryPage() {
   const [layout, setLayout] = useState("grid");
-  const [selected, setSelected] = useState(null); // store current image index
+  const [selected, setSelected] = useState(null); // index of selected image
 
   const container = {
     hidden: {},
@@ -39,15 +42,16 @@ export default function GalleryPage() {
     },
   };
 
-  // Navigate left/right in lightbox
+  // ✅ Navigation in lightbox
   const nextImage = () => setSelected((prev) => (prev + 1) % images.length);
   const prevImage = () =>
     setSelected((prev) => (prev - 1 + images.length) % images.length);
 
-  const handleDownload = (url) => {
+  // ✅ Download function
+  const handleDownload = (url, index) => {
     const link = document.createElement("a");
     link.href = url;
-    link.download = `image-${selected + 1}.jpg`;
+    link.download = `artist-image-${index + 1}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -58,14 +62,14 @@ export default function GalleryPage() {
       {/* === Header === */}
       <div className="max-w-6xl mx-auto text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-green-400 to-lime-300 bg-clip-text text-transparent">
-          The Visual Vibe Gallery
+          Artist Gallery
         </h1>
         <p className="text-gray-400 mt-3 max-w-2xl mx-auto">
-          Dive into a world of vivid imagery — explore, animate, and switch
-          between styles effortlessly.
+          Explore our featured artists — each image captures their unique style
+          and creative energy.
         </p>
 
-        {/* Layout Switch Buttons */}
+        {/* === Layout Switch Buttons === */}
         <div className="flex justify-center gap-4 mt-8">
           <button
             onClick={() => setLayout("grid")}
@@ -113,10 +117,15 @@ export default function GalleryPage() {
                   className="relative overflow-hidden rounded-xl cursor-pointer group"
                 >
                   <motion.img
-                    src={src}
-                    alt={`Gallery ${i}`}
+                    src={src.src}
+                    alt={`Artist ${i + 1}`}
                     className="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                    <p className="text-lime-400 font-semibold">
+                      View Artist {i + 1}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -140,8 +149,8 @@ export default function GalleryPage() {
                   className="overflow-hidden rounded-2xl break-inside-avoid cursor-pointer group"
                 >
                   <motion.img
-                    src={src}
-                    alt={`Gallery ${i}`}
+                    src={src.src}
+                    alt={`Artist ${i + 1}`}
                     className="w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </motion.div>
@@ -171,9 +180,9 @@ export default function GalleryPage() {
 
             {/* Image */}
             <motion.img
-              key={images[selected]}
-              src={images[selected]}
-              alt={`Full Image ${selected + 1}`}
+              key={images[selected].src}
+              src={images[selected].src}
+              alt={`Full Artist ${selected + 1}`}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
@@ -190,7 +199,7 @@ export default function GalleryPage() {
                 <ChevronLeft size={28} />
               </button>
               <button
-                onClick={() => handleDownload(images[selected])}
+                onClick={() => handleDownload(images[selected].src, selected)}
                 className="p-3 bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold rounded-full flex items-center gap-2 hover:scale-105 transition"
               >
                 <Download size={18} />

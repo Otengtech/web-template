@@ -19,15 +19,7 @@ export default function ArtistNavbar() {
   const pathname = usePathname();
 
   const navItems = ["About", "Music", "Projects", "Merch", "Contact"];
-  const mobileNavItems = ["About", "Music", "Projects", "Merch", "Contact"];
-
-  const bottomLinks = [
-    { href: "/", icon: <Home size={20} />, label: "Home" },
-    { href: "/music", icon: <Music size={20} />, label: "Music" },
-    { href: "/projects", icon: <Box size={20} />, label: "Projects" },
-    { href: "/merch", icon: <ShoppingBag size={20} />, label: "Merch" },
-    { href: "/contact", icon: <Phone size={20} />, label: "Contact" },
-  ];
+  const mobileNavItems = ["Gallery", "Music", "Projects", "Merch", "Contact","About"];
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -97,6 +89,7 @@ export default function ArtistNavbar() {
         <div className="flex flex-col h-full p-6 space-y-6">
           <div className="text-xl font-bold text-lime-300">Menu</div>
 
+          <Link href="/" className="hover:text-lime-400 transition text-sm">Home</Link>
           {mobileNavItems.map((item) => (
             <Link
               key={item}
@@ -107,32 +100,6 @@ export default function ArtistNavbar() {
               {item}
             </Link>
           ))}
-
-          {/* Newsletter (Mobile Only) */}
-          <div className="mt-auto pt-6 border-t border-white/20">
-            <p className="text-sm text-gray-300 mb-2">
-              Subscribe to our newsletter
-            </p>
-            <form
-              onSubmit={handleSubscribe}
-              className="flex flex-col gap-3"
-            >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email"
-                className="bg-black/40 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:border-lime-400 outline-none transition-all"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold py-2 rounded-md hover:scale-105 transition"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
         </div>
       </div>
 

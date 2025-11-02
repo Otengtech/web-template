@@ -161,7 +161,7 @@ export default function Footer() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-grow bg-transparent text-gray-300 text-sm px-4 py-3 outline-none placeholder-gray-500"
+                className="flex-grow bg-transparent text-gray-300 text-[16px] px-4 py-3 outline-none placeholder-gray-500"
                 required
               />
             </div>

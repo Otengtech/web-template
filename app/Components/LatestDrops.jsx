@@ -133,13 +133,12 @@ export default function LatestDrops() {
                 {/* Info */}
                 <div className="absolute bottom-4 left-4 flex flex-col space-y-2 text-left">
                   <h3 className="text-lg sm:text-xl font-bold">{drop.name}</h3>
-                  <a
-                    href="#"
+                  <Link href="/music"
                     className="flex items-center space-x-2 text-sm font-semibold text-lime-400 hover:text-green-400 transition"
                   >
                     <Play size={16} />
                     <span>Listen Now →</span>
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
             ))}
