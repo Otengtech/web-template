@@ -24,17 +24,28 @@ export async function POST(req) {
     // Save new subscriber
     await Newsletter.create({ email });
 
-    // Send welcome email (optional)
+    // === 1️⃣ Send welcome email to subscriber ===
     try {
       await resend.emails.send({
         from: "Flip Music <onboarding@resend.dev>", // your verified sender
         to: email,
         subject: "Welcome to Flip Music Newsletter 🎵",
-        text: "Thanks for subscribing to Flip Music Newsletter, you will receive all update from us quickly.",
+        text: `Hey there! 🎶\n\nThanks for subscribing to Flip Music — you'll now get exclusive updates, new tracks, and behind-the-scenes content straight to your inbox.\n\nStay tuned,\nFlip Music Team`,
       });
     } catch (mailError) {
-      console.error("Newsletter email send failed:", mailError);
-      // Don’t throw — DB already saved successfully
+      console.error("Subscriber welcome email failed:", mailError);
+    }
+
+    // === 2️⃣ Send notification email to you (the admin) ===
+    try {
+      await resend.emails.send({
+        from: "Flip Music <onboarding@resend.dev>",
+        to: process.env.EMAIL_USER, // <== add this in your Render env vars
+        subject: "🎉 New Newsletter Subscriber!",
+        text: `A new user has joined your Flip Music newsletter list.\n\nSubscriber email: ${email}\n\nCheck your dashboard for details.`,
+      });
+    } catch (adminMailError) {
+      console.error("Admin notification email failed:", adminMailError);
     }
 
     return NextResponse.json({ message: "Subscribed successfully!" }, { status: 200 });
