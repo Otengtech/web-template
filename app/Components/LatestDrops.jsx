@@ -5,25 +5,28 @@ import { useEffect, useState } from "react";
 import { Play, Music2 } from "lucide-react";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
+import Monalisa from "@/app/Assets/monalisa.jpg";
+import Wait from "@/app/Assets/wait.jpg";
+import Lovaboy from "@/app/Assets/lovaboy.jpg";
 
 const drops = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2",
+    image: Monalisa,
     type: "Afrobeats",
-    name: "Midnight Groove",
+    name: "Monalisa",
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
-    type: "RnB",
-    name: "Velvet Nights",
+    image: Wait,
+    type: "Afrobeats",
+    name: "Wait",
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1485579149621-3123dd979885",
-    type: "Pop",
-    name: "Summer Rush",
+    image: Lovaboy,
+    type: "Afrobeat",
+    name: "Lovaboy",
   },
   {
     id: 4,
@@ -91,7 +94,7 @@ export default function LatestDrops() {
           <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent">
             Latest Drops
           </h2>
-          <p className="text-gray-200 text-sm sm:text-base text-left md:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-200 text-sm sm:text-base text-left md:text-center md:text-lg max-w-2xl mx-auto">
             Discover the freshest sounds of the season — new vibes, bold beats,
             and pure energy from the studio to your playlist.
           </p>
