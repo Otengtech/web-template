@@ -112,7 +112,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-extrabold mb-8 bg-gradient-to-r from-green-500 to-lime-400 bg-clip-text text-transparent"
           >
-            Musical Style & Influence
+            Musical Style & Influence.
           </motion.h2>
 
           <motion.p
