@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Instagram, Twitter, Youtube } from "lucide-react";
+import { FaTiktok, FaFacebook, FaWhatsapp } from "react-icons/fa";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,11 @@ const ContactPage = () => {
     message: "",
   });
 
-  const [status, setStatus] = useState({ loading: false, success: null, error: null });
+  const [status, setStatus] = useState({
+    loading: false,
+    success: null,
+    error: null,
+  });
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -36,11 +41,19 @@ const ContactPage = () => {
       }
 
       const data = await res.json();
-      setStatus({ loading: false, success: data?.message || "Message sent successfully!", error: null });
+      setStatus({
+        loading: false,
+        success: data?.message || "Message sent successfully!",
+        error: null,
+      });
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
       console.error(err);
-      setStatus({ loading: false, success: null, error: "Failed to send message. Please try again later." });
+      setStatus({
+        loading: false,
+        success: null,
+        error: "Failed to send message. Please try again later.",
+      });
     }
   };
 
@@ -104,23 +117,41 @@ const ContactPage = () => {
             </div>
 
             <div className="flex gap-6 pt-6">
-              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
+              <a
+                href="#"
+                className="text-lime-400 hover:text-lime-400 transition-colors"
+              >
                 <Instagram size={24} />
               </a>
-              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
+              <a
+                href="#"
+                className="text-lime-400 hover:text-lime-400 transition-colors"
+              >
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
+              <a
+                href="#"
+                className="text-lime-400 hover:text-lime-400 transition-colors"
+              >
                 <Youtube size={24} />
               </a>
-              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
-                <Tiktok size={24} />
+              <a
+                href="#"
+                className="text-lime-400 hover:text-lime-400 transition-colors"
+              >
+                <FaTiktok size={24} />
               </a>
-              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
-                <Facebook size={24} />
+              <a
+                href="#"
+                className="text-lime-400 hover:text-lime-400 transition-colors"
+              >
+                <FaFacebook size={24} />
               </a>
-              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
-                <WhatsApp size={24} />
+              <a
+                href="#"
+                className="text-lime-400 hover:text-lime-400 transition-colors"
+              >
+                <FaWhatsapp size={24} />
               </a>
             </div>
           </motion.div>
@@ -136,7 +167,9 @@ const ContactPage = () => {
              shadow-[0_0_20px_rgba(163,230,53,0.15)] space-y-6 mx-auto backdrop-blur-sm"
           >
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Full Name</label>
+              <label className="block text-sm text-gray-400 mb-2">
+                Full Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -150,7 +183,9 @@ const ContactPage = () => {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Email Address</label>
+              <label className="block text-sm text-gray-400 mb-2">
+                Email Address
+              </label>
               <input
                 type="email"
                 name="email"
@@ -164,7 +199,9 @@ const ContactPage = () => {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Message</label>
+              <label className="block text-sm text-gray-400 mb-2">
+                Message
+              </label>
               <textarea
                 name="message"
                 placeholder="Write your message..."
@@ -189,8 +226,12 @@ const ContactPage = () => {
             </motion.button>
 
             {/* Feedback Messages */}
-            {status.success && <p className="text-green-400 text-center">{status.success}</p>}
-            {status.error && <p className="text-red-500 text-center">{status.error}</p>}
+            {status.success && (
+              <p className="text-green-400 text-center">{status.success}</p>
+            )}
+            {status.error && (
+              <p className="text-red-500 text-center">{status.error}</p>
+            )}
           </motion.form>
         </div>
       </section>
