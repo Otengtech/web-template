@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Picture from "@/app/Assets/p4.jpg";
 import { Music, Award, Mic2, Headphones } from "lucide-react";
+import StreamsSection from "../Components/StreamSection";
 
 const AboutPage = () => {
   return (
@@ -99,6 +100,7 @@ const AboutPage = () => {
           ))}
         </div>
       </section>
+      <StreamsSection />
 
       {/* ===== MUSICAL STYLE & INFLUENCE ===== */}
       <section className="py-24 px-6 md:px-20 bg-gradient-to-b from-black to-gray-950">
@@ -118,11 +120,9 @@ const AboutPage = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-400 leading-relaxed max-w-3xl mx-auto"
+            className="text-gray-400 leading-relaxed text-left md:text-center max-w-3xl mx-auto"
           >
-            Flip Music blends <span className="text-lime-400">Afrobeat</span>,
-            <span className="text-lime-400"> R&B</span>, and{" "}
-            <span className="text-lime-400">Soul</span> with futuristic
+            Big Flip blends Afrobeat with futuristic
             production and deeply emotional lyrics. His inspirations range from
             the rhythmic pulse of Lagos to the creative energy of Accra — mixing
             cultural roots with a modern edge. Each song embodies emotion,

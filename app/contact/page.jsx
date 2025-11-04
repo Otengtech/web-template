@@ -60,7 +60,7 @@ const ContactPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-gray-400 mt-6 text-sm md:text-base max-w-2xl mx-auto"
+          className="text-gray-400 text-left md:text-center mt-6 text-sm md:text-base max-w-2xl mx-auto"
         >
           Get in touch with Flip Music for bookings, collaborations, or media
           inquiries. We’re open to creative partnerships that move sound and
@@ -69,7 +69,7 @@ const ContactPage = () => {
       </section>
 
       {/* ===== CONTACT SECTION ===== */}
-      <section className="py-20 px-6 md:px-20 bg-gradient-to-b from-black via-gray-950 to-black">
+      <section className="pb-20 pt-10 px-6 md:px-20 bg-gradient-to-b from-black via-gray-950 to-black">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 items-start">
           {/* ===== LEFT INFO ===== */}
           <motion.div
@@ -104,14 +104,23 @@ const ContactPage = () => {
             </div>
 
             <div className="flex gap-6 pt-6">
-              <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
+              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
+              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-lime-400 transition-colors">
+              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
                 <Youtube size={24} />
+              </a>
+              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
+                <Tiktok size={24} />
+              </a>
+              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
+                <Facebook size={24} />
+              </a>
+              <a href="#" className="text-lime-400 hover:text-lime-400 transition-colors">
+                <WhatsApp size={24} />
               </a>
             </div>
           </motion.div>
@@ -123,7 +132,7 @@ const ContactPage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="w-full md:w-[60%] bg-transparent p-6 md:p-8 border border-lime-400/30 
+            className="w-full md:w-[60%] bg-transparent p-10 md:p-8 border border-lime-400 rounded-lg 
              shadow-[0_0_20px_rgba(163,230,53,0.15)] space-y-6 mx-auto backdrop-blur-sm"
           >
             <div>
@@ -134,7 +143,7 @@ const ContactPage = () => {
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-transparent border border-lime-400/30 rounded-full px-4 py-3 text-sm 
+                className="w-full bg-transparent border border-lime-400 rounded-full px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500"
                 required
               />
@@ -148,7 +157,7 @@ const ContactPage = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-transparent border border-lime-400/30 rounded-full px-4 py-3 text-sm 
+                className="w-full bg-transparent border border-lime-400 rounded-full px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500"
                 required
               />
@@ -162,7 +171,7 @@ const ContactPage = () => {
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full bg-transparent border border-lime-400/30 rounded-2xl px-4 py-3 text-sm 
+                className="w-full bg-transparent border border-lime-400 rounded-2xl px-4 py-3 text-sm 
                  focus:border-lime-400 outline-none transition-all text-gray-200 placeholder-gray-500 resize-none"
                 required
               ></textarea>

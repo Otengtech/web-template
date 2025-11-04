@@ -9,7 +9,7 @@ export default function MiniAbout() {
   const router = useRouter();
 
   return (
-    <section className="min-h-[70vh] bg-black text-white py-16 px-6 sm:px-12 md:px-32 flex flex-col-reverse md:flex-row items-center justify-center gap-10">
+    <section className="min-h-[70vh] bg-black text-white py-16 px-6 sm:px-12 md:px-32 flex flex-col md:flex-row items-center justify-center gap-10">
       
       {/* === Artist Info === */}
       <motion.div
@@ -23,7 +23,7 @@ export default function MiniAbout() {
           About the Artist
         </h2>
 
-        <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
+        <p className="text-gray-300 leading-relaxed text-sm text-left sm:text-base md:text-lg">
           A visionary artist known for blending emotion, color, and rhythm into
           every piece. Through sound and visuals, their art explores human
           connection, identity, and the beauty found in everyday chaos.

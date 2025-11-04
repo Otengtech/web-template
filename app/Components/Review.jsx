@@ -39,7 +39,7 @@ const artistReviews = [
 
 const ArtistReviews = () => {
   return (
-    <section className="py-16 bg-gray-900">
+    <section className="py-16 bg-black">
       <div className="max-w-6xl mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -59,7 +59,7 @@ const ArtistReviews = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: review.id * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow"
+              className="bg-transparent border border-lime-400/20 p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
