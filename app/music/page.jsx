@@ -164,7 +164,7 @@ export default function MusicGallery() {
     },
     {
       name: "YouTube",
-      to: "https://youtube.com/",
+      to: "www.youtube.com/@Westboyflip",
       icon: <FaYoutube className="text-red-500 w-8 h-8" />,
       bg: "bg-gradient-to-br from-black to-red-700",
     },
