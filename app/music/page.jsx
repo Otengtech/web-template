@@ -49,35 +49,26 @@ const songs = [
     year: 2022,
     plays: "570K",
     cover: Lovaboy,
-    src: "/music/Kwesi-Arthur-Grind-Day-Remix-ft-Sarkodie.mp3",
+    src: "/music/lovaboy.mp3",
   },
-  // {
-  //   id: 4,
-  //   title: "African Gender",
-  //   genre: "Afrobeat",
-  //   year: 2022,
-  //   plays: "440K",
-  //   cover: Lovaboy,
-  //   src: "/music/african.mp3",
-  // },
-  // {
-  //   id: 5,
-  //   title: "Emo Played",
-  //   genre: "Afrobeat",
-  //   year: 2022,
-  //   plays: "145K",
-  //   cover: Lovaboy,
-  //   src: "/music/emo.mp3",
-  // },
-  // {
-  //   id: 6,
-  //   title: "City Frequency",
-  //   genre: "Afrobeat",
-  //   year: 2022,
-  //   plays: "239K",
-  //   cover: Lovaboy,
-  //   src: "/music/holy.mp3",
-  // },
+  {
+    id: 4,
+    title: "African Gender",
+    genre: "Afrobeat",
+    year: 2022,
+    plays: "440K",
+    cover: Lovaboy,
+    src: "/music/african-gender.mp3",
+  },
+  {
+    id: 5,
+    title: "Emo Played",
+    genre: "Afrobeat",
+    year: 2022,
+    plays: "145K",
+    cover: Lovaboy,
+    src: "/music/emo-played.mp3",
+  },
 ];
 
 export default function MusicGallery() {
@@ -146,34 +137,34 @@ export default function MusicGallery() {
   const platforms = [
     {
       name: "Audiomack",
-      to: "https://audiomack.com/",
+      to: "https://tr.ee/42ff51xB9W",
       icon: <SiAudiomack className="text-yellow-400 w-8 h-8" />,
       bg: "bg-gradient-to-br from-black to-orange-600",
     },
     {
       name: "Apple Music",
-      to: "https://music.apple.com/",
+      to: "https://tr.ee/SAC6vR0lor",
       icon: <FaApple className="text-white w-8 h-8" />,
       bg: "bg-gradient-to-br from-gray-800 to-gray-900",
     },
     {
       name: "Spotify",
-      to: "https://open.spotify.com/",
+      to: "https://tr.ee/FXMCfdKMS4",
       icon: <FaSpotify className="text-green-500 w-8 h-8" />,
       bg: "bg-gradient-to-br from-black to-green-700",
     },
     {
       name: "YouTube",
-      to: "www.youtube.com/@Westboyflip",
+      to: "https://tr.ee/_Fdf1Lxx-P",
       icon: <FaYoutube className="text-red-500 w-8 h-8" />,
       bg: "bg-gradient-to-br from-black to-red-700",
     },
     {
       name: "Boomplay",
-      to: "https://www.boomplay.com/",
+      to: "https://tr.ee/z3baSWsfd0",
       icon: (
         <Image
-          src= {Boomplay}
+          src={Boomplay}
           alt="Boomplay"
           width={32}
           height={32}
@@ -249,9 +240,9 @@ export default function MusicGallery() {
                     setShowModal(true);
                     setCurrentSong(song);
                   }}
-                  className="mt-4 bg-gradient-to-r from-green-500 to-lime-400 cursor-pointer text-black py-2 px-4 rounded-r-full hover:scale-105 transition-transform"
+                  className="mt-4 bg-gradient-to-r from-green-500 to-lime-400 cursor-pointer text-black py-2 px-4 rounded-full hover:scale-105 transition-transform"
                 >
-                  Full Song →
+                  <Link href="https://linktr.ee/BIGFLIPmusic">Full Song →</Link>
                 </button>
               </div>
             </motion.div>
@@ -261,139 +252,6 @@ export default function MusicGallery() {
 
       {/* AUDIO PLAYER (hidden) */}
       <audio ref={audioRef} src={currentSong?.src || ""} />
-
-      {/* MODAL */}
-      <AnimatePresence>
-  {showModal && (
-    <motion.div
-      className="fixed inset-0 z-50 flex justify-center items-start bg-black/40 backdrop-blur-md overflow-y-auto"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Inner Wrapper to Control Centering and Padding */}
-      <div className="flex justify-center w-full min-h-screen pt-24 sm:pt-28 px-4 pb-10">
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="bg-gray-900/80 border border-lime-400/20 rounded-2xl p-6 sm:p-8 w-full max-w-md shadow-2xl backdrop-blur-xl flex flex-col items-center"
-        >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-lime-300">
-            Stream on Your Favorite Platform
-          </h2>
-
-          {/* Platforms List */}
-          <div className="flex flex-col gap-3 w-full">
-            {platforms.map((p, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className={`rounded-xl p-4 flex items-center justify-start gap-3 cursor-pointer hover:opacity-90 ${p.bg}`}
-              >
-                <Link
-                  href={p.to}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 w-full"
-                >
-                  <div className="w-10 h-10 flex items-center justify-center">
-                    {p.icon}
-                  </div>
-                  <span className="text-sm font-medium text-white">
-                    {p.name}
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          <button
-            onClick={() => setShowModal(false)}
-            className="mt-8 w-full bg-lime-400 text-black font-semibold py-2 rounded-full hover:opacity-90 transition"
-          >
-            Close
-          </button>
-        </motion.div>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
-      {/* STREAMING PLATFORMS SECTION */}
-      <section className="px-6 md:px-20 py-20 bg-gray-950 border-t border-lime-400/10">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-center mb-12 text-white"
-        >
-          Stream on these Platforms
-        </motion.h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              name: "Spotify",
-              icon: <FaSpotify className="text-green-500 w-10 h-10" />,
-              desc: "Stream millions of tracks and discover new hits on Spotify.",
-              to: "spotify.com",
-            },
-            {
-              name: "Apple Music",
-              icon: <FaApple className="text-white w-10 h-10" />,
-              desc: "Experience high-fidelity sound and curated playlists on Apple Music.",
-              to: "applemusic.com",
-            },
-            {
-              name: "Audiomack",
-              icon: <SiAudiomack className="text-yellow-400 w-10 h-10" />,
-              desc: "Free music streaming and discovery for artists and fans on Audiomack.",
-              to: "audiomack.com",
-            },
-            {
-              name: "YouTube Music",
-              icon: <FaYoutube className="text-red-500 w-10 h-10" />,
-              desc: "Watch and listen to your favorite tracks on YouTube Music.",
-              to: "www.youtube.com/@Westboyflip",
-            },
-            {
-              name: "Boomplay",
-              icon: (
-                <Image
-                  src={Boomplay}
-                  alt="Boomplay"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              ),
-              desc: "Africa’s leading music streaming platform — listen anytime, anywhere.",
-              to: "boomplay.com",
-            },
-          ].map((platform, index) => (
-            <motion.div
-              key={platform.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-transparent border border-lime-400/20 rounded-2xl p-6 text-center shadow-md hover:shadow-lime-400/10 transition-all duration-300"
-            >
-              <Link href={platform.to}>
-                <div className="flex justify-center mb-4">{platform.icon}</div>
-              <h3 className="text-xl font-semibold text-lime-400 mb-2">
-                {platform.name}
-              </h3>
-              <p className="text-gray-400 text-sm">{platform.desc}</p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
