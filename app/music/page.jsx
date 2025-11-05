@@ -188,7 +188,7 @@ export default function MusicGallery() {
           THE MUSIC
         </motion.h1>
         <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-          Discover Flip Music’s finest — preview and stream your favorite hits.
+          Discover Flip Music’s finest — preview and stream your favorite hits
         </p>
       </section>
 
