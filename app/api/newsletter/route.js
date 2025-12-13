@@ -29,23 +29,21 @@ export async function POST(req) {
     // Save subscriber
     await Newsletter.create({ email });
 
+
     // 1️⃣ Welcome email
     try {
       await sendMail({
         to: email,
         subject: "🎵 Welcome to Flip Music Newsletter!",
         text: `
-Hey there 👋
-
-Thanks for subscribing to the Flip Music newsletter!
-
-You’ll get:
-- New music releases 🎧
-- Behind-the-scenes content 🎬
-- Upcoming shows 🎤
-
-Stay vibing!
-– Flip Music Team
+        Hey there 👋
+        Thanks for subscribing to the Flip Music newsletter!
+        You’ll get:
+        - New music releases 🎧
+        - Behind-the-scenes content 🎬
+        - Upcoming shows 🎤
+        Stay vibing!
+        – Flip Music Team
         `,
       });
     } catch (err) {
@@ -58,10 +56,9 @@ Stay vibing!
         to: process.env.EMAIL_USER,
         subject: "📩 New Newsletter Subscription",
         text: `
-New subscriber alert 🚀
-
-Email: ${email}
-Time: ${new Date().toLocaleString()}
+        New subscriber alert 🚀
+        Email: ${email}
+        Time: ${new Date().toLocaleString()}
         `,
       });
     } catch (err) {

@@ -19,46 +19,35 @@ export async function POST(req) {
     // Save message to MongoDB
     await Contact.create({ name, email, message });
 
-    // 1️⃣ Send message to ADMIN
-    try {
-      await sendMail({
-        to: process.env.EMAIL_USER,
-        subject: `📩 New Message from ${name}`,
-        text: `
-You received a new message from your website:
 
-Name: ${name}
-Email: ${email}
+    // Admin notification
+    await sendMail({
+      from: `"Website Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,  // Admin inbox
+      subject: `📩 New Message from ${name}`,
+      text: `You received a new message:
+      Name: ${name}
+      Email: ${email}
+      Message:
+      ${message}`,
+          });
 
-Message:
-${message}
-        `,
-      });
-    } catch (err) {
-      console.error("Admin email failed:", err);
-    }
 
     // 2️⃣ Send confirmation to USER
-    try {
-      await sendMail({
-        to: email,
-        subject: "Thanks for contacting Flip Music 🎵",
-        text: `
-Hey ${name},
+    await sendMail({
+      from: `"Flip Music Team" <${process.env.EMAIL_USER}>`,
+      to: email,  // User inbox
+      replyTo: process.env.EMAIL_USER, // replies go to admin
+      subject: "Thanks for contacting Flip Music 🎵",
+      text: `Hey ${name},
+      Thanks for reaching out! We'll get back to you soon.
+      Here’s a copy of your message:
+      "${message}"
+      – Flip Music Team`,
+          });
 
-Thanks for reaching out to Flip Music! 🎧
-We’ve received your message and will get back to you soon.
-
-Here’s a copy of your message:
-"${message}"
-
-– Flip Music Team
-        `,
-      });
-    } catch (err) {
-      console.error("User confirmation email failed:", err);
-    }
-
+          
+    // Message logging
     return NextResponse.json(
       { message: "Message sent successfully!" },
       { status: 200 }
