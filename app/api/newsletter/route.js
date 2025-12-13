@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Newsletter from "@/models/Newsletter";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { sendMail } from "@/lib/mail";
 
 export async function POST(req) {
   try {
@@ -11,7 +9,8 @@ export async function POST(req) {
     const { email } = await req.json();
 
     // Validate email
-    if (!email || !email.includes("@")) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Invalid email address" },
         { status: 400 }
@@ -27,54 +26,46 @@ export async function POST(req) {
       );
     }
 
-    // Save new subscriber
+    // Save subscriber
     await Newsletter.create({ email });
 
-    // === 1️⃣ Send Welcome Email to Subscriber ===
+    // 1️⃣ Welcome email
     try {
-      await resend.emails.send({
-        from: "Flip Music <onboarding@resend.dev>", // must be verified in Resend
+      await sendMail({
         to: email,
         subject: "🎵 Welcome to Flip Music Newsletter!",
         text: `
-Hey there! 👋
+Hey there 👋
 
-Thanks for subscribing to the Flip Music newsletter.
+Thanks for subscribing to the Flip Music newsletter!
 
-You’ll now receive updates on:
-- New releases 🎧
-- Exclusive behind-the-scenes content 🎬
-- Upcoming shows & collaborations 🎤
+You’ll get:
+- New music releases 🎧
+- Behind-the-scenes content 🎬
+- Upcoming shows 🎤
 
-Stay tuned and keep vibing with us!
-
+Stay vibing!
 – Flip Music Team
         `,
       });
-    } catch (welcomeError) {
-      console.error("Failed to send welcome email:", welcomeError);
+    } catch (err) {
+      console.error("Welcome email failed:", err);
     }
 
-    // === 2️⃣ Send Admin Notification Email ===
+    // 2️⃣ Admin notification
     try {
-      await resend.emails.send({
-        from: "Flip Music <onboarding@resend.dev>",
-        to: process.env.EMAIL_USER, // ✅ your admin email (e.g. flipmusic@gmail.com)
+      await sendMail({
+        to: process.env.EMAIL_USER,
         subject: "📩 New Newsletter Subscription",
         text: `
-Hey Flip Music Admin,
+New subscriber alert 🚀
 
-A new user has subscribed to your newsletter!
-
-📧 Subscriber Email: ${email}
-
+Email: ${email}
 Time: ${new Date().toLocaleString()}
-
-You can check your MongoDB dashboard for the new entry.
         `,
       });
-    } catch (adminError) {
-      console.error("Failed to send admin notification email:", adminError);
+    } catch (err) {
+      console.error("Admin email failed:", err);
     }
 
     return NextResponse.json(
@@ -82,7 +73,7 @@ You can check your MongoDB dashboard for the new entry.
       { status: 200 }
     );
   } catch (error) {
-    console.error("Newsletter route error:", error);
+    console.error("Newsletter error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

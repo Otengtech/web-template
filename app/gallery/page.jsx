@@ -59,7 +59,7 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-black text-white py-14 md:py-20 px-6 sm:px-14 relative">
-      {/* === Header === */}
+      {/* === Header == */}
       <div className="max-w-6xl mx-auto text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-green-400 to-lime-300 bg-clip-text text-transparent">
           Artist Gallery
