@@ -68,7 +68,7 @@ export default function LatestDrops() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, 33vw"
-                priority={i === 0} // prioritize first image for performan
+                priority={i === 0} // prioritize first image for performa
               />
 
               {/* Overlay */}

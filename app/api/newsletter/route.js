@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Newsletter from "@/models/Newsletter";
-import { sendMail } from "@/lib/mail";
+import { sendMail } from "@/lib/nodemailer";
 
 export async function POST(req) {
   try {
