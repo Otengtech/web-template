@@ -27,24 +27,18 @@ export async function POST(req) {
     }
 
     // Save subscriber
-    await Newsletter.create({ email });
+    // await Newsletter.create({ email });
 
 
-    // 1️⃣ Welcome email
+    // 1️⃣ Welcome email for user
     try {
       await sendMail({
+        from: `"Flip Music Team" <${process.env.EMAIL_USER}>`,
         to: email,
-        subject: "🎵 Welcome to Flip Music Newsletter!",
-        text: `
-        Hey there 👋
-        Thanks for subscribing to the Flip Music newsletter!
-        You’ll get:
-        - New music releases 🎧
-        - Behind-the-scenes content 🎬
-        - Upcoming shows 🎤
-        Stay vibing!
-        – Flip Music Team
-        `,
+        replyTo: process.env.EMAIL_USER, // Replies go to admin
+        subject: "Thanks for subscribing!",
+        text: `Welcome! You are subscribed.`,
+        messageId: `<${Date.now()}@westboyflip.com>`,
       });
     } catch (err) {
       console.error("Welcome email failed:", err);
@@ -53,13 +47,10 @@ export async function POST(req) {
     // 2️⃣ Admin notification
     try {
       await sendMail({
-        to: process.env.EMAIL_USER,
-        subject: "📩 New Newsletter Subscription",
-        text: `
-        New subscriber alert 🚀
-        Email: ${email}
-        Time: ${new Date().toLocaleString()}
-        `,
+        from: `"Website Notifications" <${process.env.EMAIL_USER}>`,
+        to: "otengebenezer326@gmail.com",
+        subject: `📩 New subscription from ${email}`,
+        text: `New subscriber: ${email}`,
       });
     } catch (err) {
       console.error("Admin email failed:", err);
